@@ -21,10 +21,17 @@
   <body>
     <%= render "layouts/header" %>
 
-    <main class="container">
-      <%= yield %>
-    </main>
+  <main class="container">
+    <% flash.each do |key, value| %>
+      <div id="flash-alert-<%= key %>" class="alert <%= 'alert-success' if flash[:success] %> <%= 'alert-danger' if flash[:alert] %> <%= 'alert-info' if flash[:notice] %> show">
+        <%= value %>
+      </div>
+    <% end %>
 
-    <%= render "layouts/footer" %>
+
+    <%= yield %>
+  </main>
+
+  <%= render "layouts/footer" %>
   </body>
 </html>

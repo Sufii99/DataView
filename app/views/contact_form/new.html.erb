@@ -1,9 +1,3 @@
-<% flash.each do |key, value| %>
-  <div id="flash-alert" class="alert alert-<%= key %> show">
-    <%= value %>
-  </div>
-<% end %>
-
 <%= form_with scope: :contact_form, url: contact_form_index_path, method: :post, local: true, class: "contact_for" do |form| %>
   <div class="con_div">
     <%= form.label :name %>

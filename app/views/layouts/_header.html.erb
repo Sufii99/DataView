@@ -1,9 +1,10 @@
 <header class="hed">
   <div class="hed_div">
     
-    <a href="/" class="hed_logo">
-      <img src="/logo_dv.png" alt="DataView Logo" class="hed_logo">
-    </a>
+    <%= link_to root_path, class: "hed_logo" do %>
+      <%= image_tag "logo_dv.png", alt: "DataView Logo", class: "hed_logo" %>
+    <% end %>
+
 
     <nav class="hed_nav">
       <ul>
@@ -22,7 +23,7 @@
     </nav>
 
     <% if user_signed_in? %>
-        <a href="<%= destroy_user_session_path %>" data-method="delete" class="hed_btn">Cerrar Sesión</a>
+        <%= link_to "Cerrar Sesión", destroy_user_session_path, method: :delete, class: "hed_btn" %>
     <% else %>
         <a href="<%= new_user_session_path %>" class="hed_btn">Iniciar Sesión</a>
     <% end %>

@@ -8,44 +8,6 @@
     margin-top: 120px; /* Ajuste para evitar que el formulario se solape con la cabecera */
 }
 
-/* Estilos generales de la alerta centrada */
-.alert {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 500px;
-    padding: 15px;
-    text-align: center;
-    border-radius: 8px;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
-    z-index: 9999; /* Asegura que la alerta esté por encima de otros elementos */
-}
-
-.alert.show {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* Estilos para las alertas según el tipo */
-.alert-info {
-    background-color: #d1ecf1;
-    color: #0c5460;
-}
-
-.alert-success {
-    background-color: #d4edda;
-    color: #155724;
-}
-
-.alert-danger {
-    background-color: #f8d7da;
-    color: #721c24;
-}
-
 /* Estilos generales del formulario */
 .con_div {
     margin-bottom: 20px;

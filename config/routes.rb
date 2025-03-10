@@ -1,23 +1,23 @@
 Rails.application.routes.draw do
+  # Ruta inicial
   root "home#index"
   get "home/index"
 
-  devise_for :users
-
+  # Ruta directa para un nuevo formulario de contacto
   resources :contact_form, only: %i[new create]
   Rails.application.routes.draw do
     get "contact", to: "contact_form#new", as: :contact
   end
+
+  # Para usar controladores personalizados de Devise
+  devise_for :users, controllers: {
+    sessions: "users/sessions",
+    registrations: "users/registrations"
+  }
 
   # Rutas protegidas (solo accesibles si está autenticado)
   authenticated :user do
     get "subir_datos", to: "uploads#new", as: :subir_datos
     get "mis_archivos", to: "uploads#index", as: :mis_archivos
   end
-
-  # Rutas accesibles sin iniciar sesión
-  # resources :home, only: [ :index ]
-  # get "ejemplos", to: "home#ejemplos" # Vista de Ejemplos
-  # get "manual", to: "home#manual"   # Vista de Manual
-  # get "contacto", to: "home#manual"   # Vista de Contacto
 end
