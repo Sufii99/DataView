@@ -130,7 +130,7 @@
 /* Estilos generales de la alerta */
 .alert {
   position: fixed;
-  top: 10px; /* Distancia desde la parte superior */
+  top: 100px; /* Distancia desde la parte superior */
   left: 10px; /* Distancia desde el borde izquierdo */
   width: 90%;
   max-width: 500px;

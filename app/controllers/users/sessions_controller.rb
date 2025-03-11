@@ -14,4 +14,10 @@ class Users::SessionsController < Devise::SessionsController
     super
     flash[:notice] = "¡Hasta pronto, #{username}!" if username
   end
+
+  # Mostrar mensaje cuando las credenciales son incorrectas
+  def new
+    super
+    # flash[:alert] = "Usuario o contraseña incorrectos." if flash[:alert].present?
+  end
 end

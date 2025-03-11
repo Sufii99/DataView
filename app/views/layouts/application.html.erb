@@ -23,10 +23,14 @@
 
   <main class="container">
     <% flash.each do |key, value| %>
-      <div id="flash-alert-<%= key %>" class="alert <%= 'alert-success' if flash[:success] %> <%= 'alert-danger' if flash[:alert] %> <%= 'alert-info' if flash[:notice] %> show">
+      <div id="flash-alert" class="alert 
+        <%= 'alert-success' if key == 'success' %> 
+        <%= 'alert-danger' if key == 'alert' || key == 'error' %> 
+        <%= 'alert-info' if key == 'notice' %> show">
         <%= value %>
       </div>
     <% end %>
+
 
 
     <%= yield %>
