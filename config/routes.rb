@@ -20,4 +20,11 @@ Rails.application.routes.draw do
     get "subir_datos", to: "uploads#new", as: :subir_datos
     get "mis_archivos", to: "uploads#index", as: :mis_archivos
   end
+
+  resource :cookies, only: [] do
+    collection do
+      post :accept
+      post :reject
+    end
+  end
 end

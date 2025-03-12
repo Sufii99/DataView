@@ -1,16 +1,21 @@
-document.addEventListener("turbo:load", hideFlashAlert);
-document.addEventListener("turbo:render", hideFlashAlert);
+document.addEventListener("turbo:load", setupNotifications);
+document.addEventListener("turbo:render", setupNotifications);
 
-function hideFlashAlert() {
-  const flashAlert = document.getElementById("flash-alert");
-  if (flashAlert) {
-    // Aparece la alerta inmediatamente
-    flashAlert.classList.add("show");
+function setupNotifications() {
+  const notifications = document.querySelectorAll(".notification-item");
+  
+  notifications.forEach(notification => {
+    // Cerrar notificación al hacer clic en la 'X'
+    const closeBtn = notification.querySelector(".notification-close");
+    if (closeBtn) {
+      closeBtn.addEventListener("click", () => {
+        notification.remove();
+      });
+    }
 
-    // Desaparece la alerta después de 5 segundos
+    // Desaparecer automáticamente después de 5 segundos
     setTimeout(() => {
-      flashAlert.classList.remove("show");
-    }, 5000); // 5 segundos
-  }
+      notification.remove();
+    }, 5000);
+  });
 }
-

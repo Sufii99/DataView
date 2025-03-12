@@ -1,0 +1,17 @@
+<% unless cookies[:cookies_accepted].present? %>
+  <div id="cookie-banner" class="cookie-banner">
+    <div class="card">
+      <span class="title">🍪 Cookie Notice</span>
+      <p class="description">Usamos cookies para mejorar tu experiencia. ¿Aceptas? <a href="#">Leer políticas de cookies</a>.</p>
+      <a class="prefs" href="#">Gestionar preferencias</a>    
+      <div class="actions">
+        <button id="reject-cookies" class="decline">
+          Rechazar
+        </button>
+        <button id="accept-cookies" class="valid">
+          Aceptar
+        </button>
+      </div>
+    </div>
+  </div>
+<% end %>

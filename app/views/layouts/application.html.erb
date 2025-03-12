@@ -15,6 +15,7 @@
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_include_tag "scroll_animation", defer: true %>
     <%= javascript_include_tag "alert_notification", defer: true %>
+    <%= javascript_include_tag "cookies", defer: true %>
     <%= javascript_importmap_tags %>
   </head>
 
@@ -22,16 +23,7 @@
     <%= render "layouts/header" %>
 
   <main class="container">
-    <% flash.each do |key, value| %>
-      <div id="flash-alert" class="alert 
-        <%= 'alert-success' if key == 'success' %> 
-        <%= 'alert-danger' if key == 'alert' || key == 'error' %> 
-        <%= 'alert-info' if key == 'notice' %> show">
-        <%= value %>
-      </div>
-    <% end %>
-
-
+    <%= render "layouts/notifications" %>
 
     <%= yield %>
   </main>
