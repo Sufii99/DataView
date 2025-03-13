@@ -112,6 +112,68 @@
   opacity: 1;
 }
 
+/* Contenedor del menú de usuario */
+.user-menu {
+  position: relative;
+  display: inline-block;
+}
+
+/* Botón de usuario con el mismo estilo que .hed_btn */
+.user-btn {
+  min-width: 120px;
+  cursor: pointer;
+  padding: 12px 17px;
+  border: 0;
+  border-radius: 7px;
+  background: radial-gradient(ellipse at bottom, rgba(71, 81, 92, 1) 0%, rgba(11, 21, 30, 1) 45%);
+  color: rgba(255, 255, 255, 0.735);
+  transition: all 0.3s ease-in-out;
+  font-family: "Arial Narrow";
+  font-size: 16px;
+}
+
+.user-btn:hover {
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Menú desplegable */
+.dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: #1a1a1a;
+  border-radius: 7px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  min-width: 160px;
+  list-style: none;
+  padding: 5px 0;
+  z-index: 1000;
+}
+
+/* Estilos de los elementos del menú */
+.dropdown li {
+  padding: 10px;
+  text-align: center;
+}
+
+.dropdown li a {
+  text-decoration: none;
+  color: white;
+  display: block;
+  transition: background 0.3s, color 0.3s;
+}
+
+.dropdown li:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Mostrar el menú al pasar el mouse */
+.user-menu:hover .dropdown {
+  display: block;
+}
+
 
 /* --------- FOOTER --------- */
 .fot {

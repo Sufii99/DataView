@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     get "mis_archivos", to: "uploads#index", as: :mis_archivos
   end
 
+  # Gestion de cookies
   resource :cookies, only: [] do
     collection do
       post :accept

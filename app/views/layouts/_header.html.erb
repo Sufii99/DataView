@@ -5,7 +5,6 @@
       <%= image_tag "logo_dv.png", alt: "DataView Logo", class: "hed_logo" %>
     <% end %>
 
-
     <nav class="hed_nav">
       <ul>
         <li><a href="/">Inicio</a></li>
@@ -18,15 +17,23 @@
         <% end %>
 
         <li><%= link_to "Contacto", contact_path %></li>
-
       </ul>
     </nav>
 
     <% if user_signed_in? %>
-        <%= link_to "Cerrar Sesión", destroy_user_session_path, method: :delete, class: "hed_btn" %>
+      <div class="user-menu">
+        <button class="user-btn">
+          <%= current_user.username %> ▼
+        </button>
+        <ul class="dropdown">
+          <li><a href="#">Configurar Perfil</a></li>
+          <li><%= link_to "Cerrar Sesión", destroy_user_session_path, method: :delete %></li>
+        </ul>
+      </div>
     <% else %>
-        <a href="<%= new_user_session_path %>" class="hed_btn">Iniciar Sesión</a>
+      <a href="<%= new_user_session_path %>" class="hed_btn">Iniciar Sesión</a>
     <% end %>
+
 
   </div>
 </header>
