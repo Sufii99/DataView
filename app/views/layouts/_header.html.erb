@@ -17,21 +17,27 @@
         <% end %>
 
         <li><%= link_to "Contacto", contact_path %></li>
+        <li><a href="#">Acerca de</a></li>
       </ul>
     </nav>
 
     <% if user_signed_in? %>
       <div class="user-menu">
-        <button class="user-btn">
-          <%= current_user.username %> ▼
-        </button>
+        <span class="user-link">
+          Hola, <%= current_user.username %>
+        </span>
         <ul class="dropdown">
           <li><a href="#">Configurar Perfil</a></li>
           <li><%= link_to "Cerrar Sesión", destroy_user_session_path, method: :delete %></li>
         </ul>
       </div>
     <% else %>
-      <a href="<%= new_user_session_path %>" class="hed_btn">Iniciar Sesión</a>
+      <button class="hed-btn" onclick="window.location.href='<%= new_user_session_path %>'"> 
+          Iniciar Sesión
+          <div class="arrow-wrapper">
+              <div class="arrow"></div>
+          </div>
+      </button>
     <% end %>
 
 

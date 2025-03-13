@@ -1,4 +1,4 @@
-/* Estilos para la cabecera y el pie de pagina */
+/* Estilos para la cabecera, pie de pagina, notificaciones/alertas y cookies */
 
 /* Restablecer el box-sizing globalmente para todo el contenido */
 *,
@@ -23,8 +23,8 @@
 
 .hed_div {
     display: flex;
-    justify-content: space-between; /* Distribuye el logo y el menú */
-    align-items: center; /* Centra verticalmente */
+    justify-content: space-between;
+    align-items: center;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -32,14 +32,14 @@
 .hed_logo {
     display: flex;
     align-items: center;
-    height: 60px; /* Ajusta el tamaño según sea necesario */
+    height: 60px;
     width: auto;
 }
 
 .hed_nav ul {
     list-style: none;
     display: flex;
-    gap: 25px; /* Espaciado entre elementos */
+    gap: 25px;
     margin: 0;
     padding: 0;
 }
@@ -57,94 +57,103 @@
     color: #f5a623;
     transform: scale(1.05);
 }
-
-/* From Uiverse.io by zanina-yassine */ 
-.hed_btn {
-  min-width: 120px;
-
-  position: relative;
-  cursor: pointer;
-
-  padding: 12px 17px;
+ 
+.hed-btn {
+  --primary-color: #645bff;
+  --secondary-color: #fff;
+  --hover-color: #111;
+  --arrow-width: 10px;
+  --arrow-stroke: 2px;
+  box-sizing: border-box;
   border: 0;
-  border-radius: 7px;
-
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-  background: radial-gradient(
-    ellipse at bottom,
-    rgba(71, 81, 92, 1) 0%,
-    rgba(11, 21, 30, 1) 45%
-  );
-
-  color: rgba(255, 255, 255, 0.735);
-
-  transition: all 1s cubic-bezier(0.15, 0.83, 0.66, 1);
-  text-decoration: none; /* Asegura que el texto no esté subrayado */
+  border-radius: 20px;
+  color: var(--secondary-color);
+  padding: 1em 1.8em;
+  background: var(--primary-color);
+  display: flex;
+  transition: 0.2s background;
+  align-items: center;
+  gap: 0.6em;
+  font-weight: bold;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  cursor: pointer;
 }
 
-.hed_btn::before {
+.hed-btn .arrow-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hed-btn .arrow {
+  margin-top: 1px;
+  width: var(--arrow-width);
+  background: var(--primary-color);
+  height: var(--arrow-stroke);
+  position: relative;
+  transition: 0.2s;
+}
+
+.hed-btn .arrow::before {
   content: "";
-  width: 70%;
-  height: 1px;
-
+  box-sizing: border-box;
   position: absolute;
-  bottom: 0;
-  left: 15%;
-
-  background: rgb(255, 255, 255);
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 1) 50%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  opacity: 0.2;
-
-  transition: all 1s cubic-bezier(0.15, 0.83, 0.66, 1);
+  border: solid var(--secondary-color);
+  border-width: 0 var(--arrow-stroke) var(--arrow-stroke) 0;
+  display: inline-block;
+  top: -3px;
+  right: 3px;
+  transition: 0.2s;
+  padding: 3px;
+  transform: rotate(-45deg);
 }
 
-.hed_btn:hover {
-  color: rgb(255, 255, 255, 1);
-  transform: scale(1.1) translateY(-3px);
+.hed-btn:hover {
+  background-color: var(--hover-color);
 }
 
-.hed_btn:hover::before {
-  opacity: 1;
+.hed-btn:hover .arrow {
+  background: var(--secondary-color);
 }
 
-/* Contenedor del menú de usuario */
+.hed-btn:hover .arrow:before {
+  right: 0;
+}
+
+/* Estilos del enlace del menú de usuario */
+.user-link {
+  color: white;
+  cursor: pointer;
+  padding: 10px 15px;
+  display: inline-block;
+  transition: color 0.3s;
+  font-size: 16px;
+}
+
+.user-link::after {
+  content: "  ▼";
+  font-size: 12px; /* Reducir tamaño de la flecha */
+  vertical-align: middle;
+}
+
+
+.user-link:hover {
+  color: #ccc;
+}
+
+/* Ajustar el menú desplegable */
 .user-menu {
   position: relative;
   display: inline-block;
 }
 
-/* Botón de usuario con el mismo estilo que .hed_btn */
-.user-btn {
-  min-width: 120px;
-  cursor: pointer;
-  padding: 12px 17px;
-  border: 0;
-  border-radius: 7px;
-  background: radial-gradient(ellipse at bottom, rgba(71, 81, 92, 1) 0%, rgba(11, 21, 30, 1) 45%);
-  color: rgba(255, 255, 255, 0.735);
-  transition: all 0.3s ease-in-out;
-  font-family: "Arial Narrow";
-  font-size: 16px;
-}
-
-.user-btn:hover {
-  color: white;
-  transform: scale(1.05);
-}
-
-/* Menú desplegable */
 .dropdown {
   display: none;
   position: absolute;
   right: 0;
   top: 100%;
   background: #1a1a1a;
-  border-radius: 7px;
+  border-radius: 5px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
   min-width: 160px;
   list-style: none;
@@ -152,7 +161,6 @@
   z-index: 1000;
 }
 
-/* Estilos de los elementos del menú */
 .dropdown li {
   padding: 10px;
   text-align: center;
@@ -169,7 +177,7 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
-/* Mostrar el menú al pasar el mouse */
+/* Mostrar el menú al pasar el cursor */
 .user-menu:hover .dropdown {
   display: block;
 }
@@ -177,19 +185,19 @@
 
 /* --------- FOOTER --------- */
 .fot {
-    width: 100%;             /* Asegura que el footer ocupe todo el ancho */
-    position: relative;      /* Para asegurar que no se solape con contenido */
+    width: 100%;             
+    position: relative;      
     bottom: 0;
     left: 0;
-    background-color: #000000;  /* Fondo oscuro (puedes cambiar el color según prefieras) */
-    color: white;            /* Color del texto en blanco */
-    text-align: center;      /* Centra el texto */
-    padding: 20px 0;         /* Ajusta el espaciado (arriba y abajo) */
-    margin-top: 20px;        /* Separación del contenido anterior */
+    background-color: #000000;
+    color: white;            
+    text-align: center;      
+    padding: 20px 0;         
+    margin-top: 20px;       
 }
 
+
 /* --------- ALERTAS --------- */
-/* From Uiverse.io by xerith_8140 */ 
 /* Notification container */
 .notification-container {
   /* Position top left */
@@ -215,7 +223,6 @@
 }
 
 /* Notification Item */
-
 .notification-item {
   position: relative;
   display: flex;
@@ -229,9 +236,7 @@
   box-shadow: rgba(111, 111, 111, 0.2) 0px 8px 24px;
   background-color: var(--background-color);
   transition: all 250ms ease;
-
   /* Background Pattern */
-
   --grid-color: rgba(225, 225, 225, 0.7);
   background-image: linear-gradient(
       0deg,
@@ -284,8 +289,7 @@
   transform: scale(1.1);
 }
 
-/* Notification Icons */
-
+/* Iconos de notificacion */
 .notification-item .notification-close {
   padding: 2px;
   border-radius: 5px;
@@ -304,7 +308,6 @@
 }
 
 /* Success */
-
 .success {
   color: #047857;
   background-color: #7dffbc;
@@ -348,7 +351,6 @@
 }
 
 /* Info */
-
 .info {
   color: #1e3a8a;
   background-color: #7eb8ff;
@@ -392,7 +394,6 @@
 }
 
 /* Warning */
-
 .warning {
   color: #78350f;
   background-color: #ffe57e;
@@ -436,7 +437,6 @@
 }
 
 /* Error */
-
 .error {
   color: #7f1d1d;
   background-color: #ff7e7e;
@@ -480,7 +480,6 @@
 }
 
 /* Notification content */
-
 .notification-content {
   display: flex;
   justify-content: flex-start;
@@ -498,7 +497,6 @@
 }
 
 /* Notification progress bar */
-
 .notification-progress-bar {
   position: absolute;
   bottom: 0;
@@ -507,14 +505,10 @@
   background: var(--content-color);
   width: 100%;
   transform: translateX(100%);
-
-  /* Remove the infinite property for your website */
-
   animation: progressBar 5s linear forwards infinite;
 }
 
 /* progressBar Animation */
-
 @keyframes progressBar {
   0% {
     transform: translateX(0);
@@ -525,27 +519,27 @@
   }
 }
 
-/* Banner de cookies fijo en toda la página */
+
+/* --------- COOKIES --------- */
 .cookie-banner {
   position: fixed;
-  bottom: 20px; /* Ajustado a 20px para más espacio desde el fondo */
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  background: hsl(120deg 20% 95%); /* Mismo color de fondo que la card */
-  color: black; /* Texto en negro */
+  background: hsl(120deg 20% 95%);
+  color: black;
   padding: 15px;
-  border-radius: 40px; /* Para que tenga el mismo redondeo que la card */
+  border-radius: 40px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 90%;
   max-width: 500px;
-  box-shadow: 17px 17px 34px 0px rgb(124, 134, 124), 
-    inset -8px -8px 16px 0px rgba(117, 133, 117, 0.7), 
-    inset 0px 14px 28px 0px hsl(120deg 20% 95%);
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
 }
 
-/* Asegurando que el banner se ve bien en pantallas pequeñas */
+/* Banner para pantallas pequeñas */
 @media (max-width: 600px) {
   .cookie-banner {
     width: 100%;
@@ -553,86 +547,55 @@
   }
 }
 
-/* El estilo de la card dentro del banner */
 .card {
-  background: white;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 40px;
-  border-radius: 40px;
-  background-color: hsl(120deg 20% 95%);
-  box-shadow: 17px 17px 34px 0px rgb(124, 134, 124), 
-    inset -8px -8px 16px 0px rgba(117, 133, 117, 0.7), 
-    inset 0px 14px 28px 0px hsl(120deg 20% 95%);
+  padding: 20px;
+  border-radius: 20px;
 }
 
 .card .title {
-  color: black;
-  font-size: 2rem;
-  font-weight: 600;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .card .description {
-  color: black;
   margin-top: 10px;
   margin-bottom: 20px;
 }
 
 .card .prefs {
   color: blue;
-  font-size: .8em;
-  margin-bottom: 20px;
+  font-size: 0.9em;
+  margin-bottom: 15px;
 }
 
 .card .actions {
-  margin-top: 10px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
 }
 
 .card button {
-  color: white;
   border: none;
-  background: none;
-  padding: 20px;
-  border-radius: 15px;
+  padding: 10px 15px;
+  border-radius: 10px;
   cursor: pointer;
-  font-size: 1.2em;
+  font-size: 1em;
   font-weight: bold;
 }
 
 .card .decline {
-  color: rgb(255, 0, 0);
-  box-shadow: 4px 4px 8px 0px rgb(134, 124, 124), 
-    inset -8px -8px 16px 0px rgba(92, 92, 92, 0.7), 
-    inset 0px 14px 28px 0px hsl(120deg 20% 95%);
+  background: rgb(255, 0, 0);
+  color: white;
 }
 
 .card .valid {
-  color: rgb(0, 156, 0);
-  box-shadow: 4px 4px 8px 0px rgb(124, 134, 125), 
-    inset -8px -8px 16px 0px rgba(121, 121, 121, 0.7), 
-    inset 0px 14px 28px 0px hsl(120deg 20% 95%);
+  background: rgb(0, 156, 0);
+  color: white;
 }
 
-.card .decline:hover {
-  color: white;
-  background-color: rgb(255, 0, 0);
-  box-shadow: 4px 4px 8px 0px rgb(134, 124, 124), 
-    inset -8px -8px 16px 0px rgba(134, 20, 20, 0.7), 
-    inset 0px 14px 28px 0px hsl(120deg 20% 95%);
-}
-
-.card .valid:hover {
-  color: white;
-  background-color: rgb(0, 156, 0);
-  box-shadow: 4px 4px 8px 0px rgb(124, 134, 125), 
-    inset -8px -8px 16px 0px rgba(47, 134, 20, 0.7), 
-    inset 0px 14px 28px 0px hsl(120deg 20% 95%);
-}
 
 
 /*

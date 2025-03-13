@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     get "contact", to: "contact_form#new", as: :contact
   end
 
-  # Para usar controladores personalizados de Devise
+  # Rutas para usar controladores personalizados de Devise
   devise_for :users, controllers: {
     sessions: "users/sessions",
     registrations: "users/registrations"

@@ -1,10 +1,12 @@
-/* Ajuste para que no se solape con la cabecera */
+/* Estilos para la gestion de usuarios (inicio de sesion, registro...) */
+
+/* Para que no se solape con la cabecera */
 .devise-container {
-    margin-top: 120px; /* Ajustar según la altura del header */
+    margin-top: 120px;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 80vh; /* Asegura que el contenido esté centrado verticalmente */
+    min-height: 80vh; 
 }
 
 /* Estilos generales para los formularios */
