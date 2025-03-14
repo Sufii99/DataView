@@ -8,16 +8,16 @@
     <nav class="hed_nav">
       <ul>
         <li><a href="/">Inicio</a></li>
-        <li><a href="#">Ejemplos</a></li>
-        <li><a href="#">Manual</a></li>
+        <li><a href="#">Explora</a></li>
+        <li><a href="#">Guia</a></li>
 
         <% if user_signed_in? %>
-          <li><a href="#">Subir Datos</a></li>
+          <li><a href="#">Cargar Datos</a></li>
           <li><a href="#">Mis Archivos</a></li>
         <% end %>
 
         <li><%= link_to "Contacto", contact_path %></li>
-        <li><a href="#">Acerca de</a></li>
+        <li><%= link_to "Acerca de", acerca_path %></li>
       </ul>
     </nav>
 

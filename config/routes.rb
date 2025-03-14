@@ -28,4 +28,7 @@ Rails.application.routes.draw do
       post :reject
     end
   end
+
+  # Ruta para paginas estaticas (sin logica)
+  get "acerca", to: "static_pages#acerca"
 end
