@@ -27,7 +27,7 @@
           Hola, <%= current_user.username %>
         </span>
         <ul class="dropdown">
-          <li><a href="#">Configurar Perfil</a></li>
+          <li><%= link_to "Configurar Perfil", edit_user_registration_path %></li>
           <li><%= link_to "Cerrar Sesión", destroy_user_session_path, method: :delete %></li>
         </ul>
       </div>
