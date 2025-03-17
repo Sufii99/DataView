@@ -31,4 +31,7 @@ Rails.application.routes.draw do
 
   # Ruta para paginas estaticas (sin logica)
   get "acerca", to: "static_pages#acerca"
+  get "terminos", to: "static_pages#terms", as: :terms
+  get "privacidad", to: "static_pages#privacy", as: :privacy
+  get "politica-de-cookies", to: "static_pages#cookie_policy", as: :cookie_policy
 end

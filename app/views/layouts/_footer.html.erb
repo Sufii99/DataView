@@ -1,3 +1,13 @@
-<footer class="fot">
-  <p>&copy; <%= Time.current.year %> DataView. Todos los derechos reservados.</p>
+<footer class=fot>
+  <div class="footer-container">
+
+    <ul class="footer-links">
+      <li><%= link_to "Términos y Condiciones", terms_path %></li>
+      <li><%= link_to "Política de Privacidad", privacy_path %></li>
+      <li><%= link_to "Política de Cookies", cookie_policy_path %></li>
+    </ul>
+    
+    <p>&copy; <%= Time.current.year %> DataView. Todos los derechos reservados.</p>
+    
+  </div>
 </footer>
