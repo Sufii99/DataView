@@ -12,4 +12,3 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(() => banner.remove());
     });
   });
-  

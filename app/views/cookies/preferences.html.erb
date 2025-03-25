@@ -1,0 +1,25 @@
+<div class="cookie-preferences-container">
+  <h2>Preferencias de Cookies</h2>
+  <p>Selecciona qué cookies deseas permitir:</p>
+
+  <form id="cookie-preferences-form" action="<%= save_preferences_cookies_path %>" method="post">
+    <%= csrf_meta_tags %>
+
+    <label>
+      <input type="checkbox" id="necessary-cookies" checked disabled>
+      Cookies necesarias (siempre activas)
+    </label>
+    
+    <label>
+      <input type="checkbox" id="analytics-cookies" name="preferences[analytics]" value="1" <%= cookies[:analytics_cookies] == "true" ? "checked" : "" %>>
+      Cookies de análisis
+    </label>
+    
+    <label>
+      <input type="checkbox" id="marketing-cookies" name="preferences[marketing]" value="1" <%= cookies[:marketing_cookies] == "true" ? "checked" : "" %>>
+      Cookies de marketing
+    </label>
+
+    <button type="submit" class="save-preferences">Guardar preferencias</button>
+  </form>
+</div>

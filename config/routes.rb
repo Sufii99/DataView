@@ -22,12 +22,10 @@ Rails.application.routes.draw do
   end
 
   # Gestion de cookies
-  resource :cookies, only: [] do
-    collection do
-      post :accept
-      post :reject
-    end
-  end
+  post "cookies/accept", to: "cookies#accept"
+  post "cookies/reject", to: "cookies#reject"
+  get "cookies/preferences", to: "cookies#preferences", as: :cookie_preferences
+  post "cookies/save_preferences", to: "cookies#save_preferences", as: :save_preferences_cookies
 
   # Ruta para paginas estaticas (sin logica)
   get "acerca", to: "static_pages#acerca"

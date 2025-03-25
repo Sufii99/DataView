@@ -2,8 +2,11 @@
   <div id="cookie-banner" class="cookie-banner">
     <div class="card">
       <span class="title">🍪 Cookie Notice</span>
-      <p class="description">Usamos cookies para mejorar tu experiencia. ¿Aceptas? <a href="#">Leer políticas de cookies</a>.</p>
-      <a class="prefs" href="#">Gestionar preferencias</a>    
+      <p class="description"> 
+        Usamos cookies para mejorar tu experiencia. ¿Aceptas? 
+        <a href="<% cookie_policy_path %>">Leer políticas de cookies</a>.
+      </p>
+      <a class="prefs" href="<%= cookie_preferences_path %>">Gestionar preferencias</a>
       <div class="actions">
         <button id="reject-cookies" class="decline">
           Rechazar

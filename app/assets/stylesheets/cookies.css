@@ -1,0 +1,116 @@
+/* Estilos para la banner y gestion de cookies */
+
+/* Estilos para el banner de cookies */
+.cookie-banner {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: hsl(120deg 20% 95%);
+  color: black;
+  padding: 15px;
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+}
+
+/* Banner para pantallas pequeñas */
+@media (max-width: 600px) {
+  .cookie-banner {
+    width: 100%;
+    padding: 10px;
+  }
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.card .title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.card .description {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.card .prefs {
+  color: blue;
+  font-size: 0.9em;
+  margin-bottom: 15px;
+}
+
+.card .actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card button {
+  border: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.card .decline {
+  background: rgb(255, 0, 0);
+  color: white;
+}
+
+.card .valid {
+  background: rgb(0, 156, 0);
+  color: white;
+}
+
+/* Estilo para la página de gestión de cookies */
+.cookie-preferences-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 50px auto; 
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-top: 150px;
+  }
+  
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    margin: 10px 0;
+    font-size: 16px;
+  }
+  
+  button.save-preferences {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  button.save-preferences:hover {
+    background-color: #45a049;
+  }
+  
