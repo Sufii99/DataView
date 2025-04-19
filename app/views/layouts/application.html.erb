@@ -14,20 +14,23 @@
 
     <%= yield :head %>
 
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%# Includes all stylesheet files in app/assets/stylesheets -- Ahora con tailwind %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+
     <%= javascript_importmap_tags %>
     <%= javascript_include_tag "mobile_menu", defer: true %>
     <%= javascript_include_tag "header_transition", defer: true %>
     <%= javascript_include_tag "help_drop", defer: true %>
+    <%= javascript_include_tag "chart_example", defer: true %>
 
   </head>
 
-  <body>
+  <body class="bg-blue-50 min-h-screen">
     <%= render "shared/header" %>
 
     <%= yield %>
 
     <%= render "shared/footer" %>
   </body>
+
 </html>
