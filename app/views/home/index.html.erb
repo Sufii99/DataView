@@ -1,0 +1,92 @@
+<!-- SECCION HERO -->
+<section class="relative isolate px-6 pt-2 lg:px-8">
+  <!-- Sección con texto a la izquierda y animación Lottie a la derecha -->
+  <div class="mx-auto max-w-7xl py-32 sm:py-48 lg:py-56 flex items-center justify-between">
+    <!-- Texto a la izquierda -->
+    <div class="max-w-3xl text-center sm:text-left">
+      <h1 class="font-semibold tracking-tight text-balance text-gray-900 text-4xl lg:text-5xl">Comienza a visualizar tus datos</h1>
+      <p class="mt-8 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8">Bienvenido a DataView, el lugar donde podrás darle la vista que necesitas a todos tus datos.</p>
+      <div class="mt-10 flex items-center justify-center sm:justify-start gap-x-6">
+        <a href="/" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Comenzar</a>
+        <a href="#" class="text-sm/6 font-semibold text-gray-900">Aprender más <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+
+    <!-- Animación Lottie a la derecha -->
+    <div class="flex-shrink-0">
+      <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+      <dotlottie-player 
+        src="https://lottie.host/d6de2902-615c-4281-8a4a-e746ce600398/UWG4q79Wok.lottie" 
+        background="transparent" 
+        speed="1" 
+        style="width: 500px; height: 300px" 
+        loop 
+        autoplay>
+      </dotlottie-player>
+    </div>
+  </div>
+</section>
+
+<!-- SECCION QUE ES -->
+<section class="relative isolate px-6 pt-2 lg:px-8 pb-10">
+  <div class="max-w-7xl mx-auto text-center">
+    <h2 class="font-semibold tracking-tight text-balance text-gray-900 text-4xl lg:text-5xl">
+      ¿Qué es esta plataforma?
+    </h2>
+    <p class="mt-8 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8 pb-8">
+      Esta plataforma web te permite subir tus archivos CSV y visualizar los datos de forma clara e interactiva mediante gráficas automáticas. Ideal para informes, estudios o presentaciones.
+    </p>
+
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      <!-- Card 1 -->
+      <div class="bg-gray-50 p-6 rounded-2xl shadow hover:shadow-md transition">
+        <div class="text-blue-500 text-4xl mb-4">📁</div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Carga de archivos fácil</h3>
+        <p class="text-gray-600">Solo necesitás un archivo `.csv` con tus datos. Lo subís y listo, sin instalaciones ni configuraciones.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bg-gray-50 p-6 rounded-2xl shadow hover:shadow-md transition">
+        <div class="text-green-500 text-4xl mb-4">📊</div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Gráficas interactivas</h3>
+        <p class="text-gray-600">Visualizá tus datos con gráficos automáticos y navegables. Compatible con múltiples columnas.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bg-gray-50 p-6 rounded-2xl shadow hover:shadow-md transition">
+        <div class="text-purple-500 text-4xl mb-4">🔒</div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Privacidad asegurada</h3>
+        <p class="text-gray-600">Tus archivos están protegidos y nunca se comparten. Solo vos podés ver y gestionar tu contenido.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECCION DEMO -->
+<section class="pt-30 py-20 px-6 md:px-12">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+    
+    <!-- Imagen demo -->
+    <div class="w-full">
+      <div class="aspect-w-16 aspect-h-9 rounded-xl overflow-hidden shadow-lg">
+        <img src="https://via.placeholder.com/800x450.png?text=Demo+de+Gráfica" alt="Demo gráfica" class="w-full h-full object-cover">
+      </div>
+    </div>
+
+    <!-- Texto explicativo -->
+    <div>
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+        Visualiza tus datos al instante
+      </h2>
+      <p class="text-gray-600 text-lg mb-6">
+        Así se verá tu archivo procesado. Sube el archivo y automáticamente se genera una gráfica interactiva que puedes explorar. No necesitas conocimientos técnicos.
+      </p>
+
+      <a href="/ class="inline-block px-6 py-3 bg-blue-600 text-white text-lg font-medium rounded-xl shadow hover:bg-blue-700 transition">
+        Probar con mi archivo
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SECCION FAQ -->
