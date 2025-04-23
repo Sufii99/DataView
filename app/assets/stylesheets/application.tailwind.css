@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+.group.is-open, .nvar:hover {
+    color: #2563eb;
+}
