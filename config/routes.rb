@@ -5,4 +5,8 @@ Rails.application.routes.draw do
   devise_for :users
 
   get "contact", to: "contact#contact_form"
+
+  authenticate :user do
+    get '/dashboard', to: 'dashboard#show'
+  end
 end
