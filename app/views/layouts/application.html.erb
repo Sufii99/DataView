@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "React Ro R" %></title>
+    <title><%= content_for(:title) || "DataView" %></title>
     
     <%# Web responsive %>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -22,7 +22,7 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body class = "bg-blue-100">
+  <body>
     <%= render "shared/header" %>
 
     <%= render "shared/notifications" %>

@@ -12,8 +12,8 @@
     end %>
 
     <div
+      class="flash-alert <%= css_class %> border-l-4 p-2 rounded-lg flex items-center transition duration-300 ease-in-out hover:scale-105 hover:brightness-105 transform shadow-lg"
       role="alert"
-      class="<%= css_class %> border-l-4 p-2 rounded-lg flex items-center transition duration-300 ease-in-out hover:scale-105 hover:brightness-105 transform shadow-lg"
     >
       <svg
         stroke="currentColor"
@@ -45,8 +45,9 @@
 </div>
 <script>
   document.addEventListener("turbo:load", () => {
-    document.querySelectorAll("[role='alert']").forEach(el => {
-      setTimeout(() => el.remove(), 5000); // desaparece a los 5s
+    document.querySelectorAll(".flash-alert").forEach(el => {
+      setTimeout(() => el.remove(), 5000);
     });
   });
 </script>
+
