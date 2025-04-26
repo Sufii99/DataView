@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   get "contact", to: "contact#contact_form"
 
   authenticate :user do
-    get '/dashboard', to: 'dashboard#show'
+    get "/dashboard", to: "dashboard#show"
+  end
+
+  authenticate :user do
+    resources :file_uploads, only: [ :index, :create, :destroy ]
   end
 end
