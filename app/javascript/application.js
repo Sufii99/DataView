@@ -7,6 +7,7 @@ import * as React from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './components/App'
 import BarChart from "./components/BarChart";
+import DashboardApp from './components/DashboardApp'
 
 document.addEventListener("turbo:load", () => {
   const reactRoot = document.getElementById("react-root");
@@ -19,5 +20,11 @@ document.addEventListener("turbo:load", () => {
   if (d3Container) {
     const rootD3 = createRoot(d3Container); 
     rootD3.render(<BarChart />);
+  }
+
+  const dashboardRoot = document.getElementById("dashboard-root");
+  if (dashboardRoot) {
+    const root = createRoot(dashboardRoot);
+    root.render(<DashboardApp />);
   }
 });
