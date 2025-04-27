@@ -1,8 +1,7 @@
 import "@hotwired/turbo-rails"
-import "./controllers"
-import './header/mobile_menu.js';
-import './header/header_transition.js';
-import './header/help_drop.js';
+import './views/header/mobile_menu.js';
+import './views/header/header_transition.js';
+import './views/header/help_drop.js';
 import * as React from 'react'
 import { createRoot } from 'react-dom/client'
 import BarChart from "./components/BarChart";
