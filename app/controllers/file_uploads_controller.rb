@@ -10,18 +10,15 @@ class FileUploadsController < ApplicationController
 
   # POST /file_uploads
   def create
-    @file_upload = current_user.file_uploads.new(file_upload_params)
+    @file_upload = current_user.file_uploads.new(name: params[:name])
 
     if params[:file]
       @file_upload.data_file.attach(params[:file])
 
       if @file_upload.data_file.attached?
-        # Aquí calculamos tamaño, columnas, filas...
         @file_upload.original_filename = @file_upload.data_file.filename.to_s
         @file_upload.size_in_bytes = @file_upload.data_file.byte_size
         @file_upload.file_type = detect_file_type(@file_upload.data_file)
-
-        # Opcionalmente, columnas y filas más tarde
       end
     end
 

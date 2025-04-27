@@ -1,4 +1,5 @@
 import React from 'react';
+import UploadForm from './UploadForm';
 
 export default function MainContent({ activeSection, selectedFileId }) {
   return (
@@ -6,7 +7,7 @@ export default function MainContent({ activeSection, selectedFileId }) {
       {activeSection === 'upload' && (
         <div>
           <h1 className="text-3xl font-bold mb-6">Subir nuevo archivo</h1>
-          <p className="text-gray-700">Aquí estará el formulario para subir archivos.</p>
+          <UploadForm />
         </div>
       )}
 
