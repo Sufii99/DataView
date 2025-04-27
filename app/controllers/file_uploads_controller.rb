@@ -1,5 +1,5 @@
 class FileUploadsController < ApplicationController
-  before_action :authenticate_user! # Asegura que esté logueado
+  before_action :authenticate_user!
   before_action :set_file_upload, only: [ :destroy ]
 
   # GET /file_uploads
@@ -21,7 +21,7 @@ class FileUploadsController < ApplicationController
         @file_upload.size_in_bytes = @file_upload.data_file.byte_size
         @file_upload.file_type = detect_file_type(@file_upload.data_file)
 
-        # Opcionalmente, puedes calcular columnas y filas más tarde
+        # Opcionalmente, columnas y filas más tarde
       end
     end
 

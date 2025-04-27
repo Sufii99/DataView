@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function Sidebar({ sidebarOpen, setSidebarOpen, activeSection, setActiveSection, setSelectedFileId }) {
-  const files = ["Archivo 1", "Archivo 2"]; // 🔥 Más adelante, dinámico desde API
+  const files = ["Archivo 1", "Archivo 2"];
 
   return (
     <div className={`fixed inset-y-0 left-0 transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
@@ -31,7 +31,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen, activeSection, se
                 className="block w-full text-left text-gray-700 hover:text-indigo-600"
                 onClick={() => {
                   setActiveSection('file');
-                  setSelectedFileId(index); // 🔥 Luego será el ID real
+                  setSelectedFileId(index); 
                   setSidebarOpen(false);
                 }}
               >
