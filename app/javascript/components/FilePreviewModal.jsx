@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Papa from 'papaparse';
 
-export default function FilePreviewModal({ file, onClose }) {
+export default function FilePreviewModal({ file, onClose, setUploadedFiles }) {
   const [previewData, setPreviewData] = useState([]);
   const [customName, setCustomName] = useState('');
 
@@ -25,21 +25,23 @@ export default function FilePreviewModal({ file, onClose }) {
     formData.append('name', customName);
     formData.append('file', file);
   
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').content; // Para obtener el token CSRF
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
   
     try {
       const response = await fetch('/file_uploads', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
-          'X-CSRF-Token': csrfToken, // Incluir el token CSRF en los headers
+          'X-CSRF-Token': csrfToken,
         },
         body: formData,
       });
   
       if (response.ok) {
+        const newFile = await response.json();
+        setUploadedFiles(prev => [...prev, newFile]);
         alert('Archivo subido correctamente.');
-        onClose();
+        onClose();      
       } else {
         const error = await response.json();
         alert('Error al subir archivo: ' + error.errors.join(', '));
@@ -49,14 +51,13 @@ export default function FilePreviewModal({ file, onClose }) {
       alert('Error en la subida.');
     }
   };
-  
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-3xl relative">
         <h2 className="text-2xl font-semibold mb-6">Vista previa del archivo</h2>
 
-        {/* Tabla preview */}
+        {/* Vista previa de la tabla */}
         <div className="overflow-x-auto mb-4">
           <table className="min-w-full text-sm text-gray-700">
             <thead>
@@ -83,7 +84,7 @@ export default function FilePreviewModal({ file, onClose }) {
           </table>
         </div>
 
-        {/* Input nombre personalizado */}
+        {/* Input para elegir nombre */}
         <div className="mb-4">
           <label className="block mb-2 font-semibold text-gray-600">Nombre para guardar:</label>
           <input

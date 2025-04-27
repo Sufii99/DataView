@@ -1,8 +1,6 @@
 import React from 'react';
 
-export default function Sidebar({ sidebarOpen, setSidebarOpen, activeSection, setActiveSection, setSelectedFileId }) {
-  const files = ["Archivo 1", "Archivo 2"];
-
+export default function Sidebar({ sidebarOpen, setSidebarOpen, activeSection, setActiveSection, setSelectedFileId, uploadedFiles }) {
   return (
     <div className={`fixed inset-y-0 left-0 transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
                      transition-transform duration-200 ease-in-out 
@@ -25,17 +23,17 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen, activeSection, se
         <div className="mt-4">
           <h3 className="text-lg font-semibold text-gray-600 mb-2">Archivos</h3>
           <div className="space-y-2">
-            {files.map((file, index) => (
+            {uploadedFiles.map((file, index) => (
               <button
                 key={index}
                 className="block w-full text-left text-gray-700 hover:text-indigo-600"
                 onClick={() => {
                   setActiveSection('file');
-                  setSelectedFileId(index); 
+                  setSelectedFileId(index);
                   setSidebarOpen(false);
                 }}
               >
-                📄 {file}
+                📄 {file.name}
               </button>
             ))}
           </div>

@@ -1,69 +1,65 @@
 import React, { useState } from 'react';
 import FilePreviewModal from './FilePreviewModal';
 
-export default function UploadForm() {
-  const [isDragging, setIsDragging] = useState(false);
-  const [selectedFile, setSelectedFile] = useState(null);
+export default function UploadForm({ setUploadedFiles }) {
+  const [fileToPreview, setFileToPreview] = useState(null);
   const [showModal, setShowModal] = useState(false);
-
-  const handleDragOver = (e) => {
-    e.preventDefault();
-    setIsDragging(true);
-  };
-
-  const handleDragLeave = (e) => {
-    e.preventDefault();
-    setIsDragging(false);
-  };
-
-  const handleDrop = (e) => {
-    e.preventDefault();
-    setIsDragging(false);
-    const file = e.dataTransfer.files[0];
-    if (file) {
-      setSelectedFile(file);
-      setShowModal(true);
-    }
-  };
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setSelectedFile(file);
+      setFileToPreview(file);
       setShowModal(true);
     }
   };
 
-  const handleCancel = () => {
-    setSelectedFile(null);
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files[0];
+    if (file) {
+      setFileToPreview(file);
+      setShowModal(true);
+    }
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+  };
+
+  const handleCloseModal = () => {
     setShowModal(false);
+    setFileToPreview(null);
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-full">
-      <div
-        className={`border-4 border-dashed rounded-lg w-full max-w-xl p-12 flex flex-col items-center justify-center
-                   ${isDragging ? 'bg-indigo-50 border-indigo-400' : 'bg-white border-gray-300'}`}
-        onDragOver={handleDragOver}
-        onDragLeave={handleDragLeave}
-        onDrop={handleDrop}
+    <div 
+      onDrop={handleDrop} 
+      onDragOver={handleDragOver} 
+      className="border-4 border-dashed border-gray-300 p-8 rounded-lg flex flex-col items-center justify-center text-center bg-white hover:bg-gray-50 transition"
+    >
+      <p className="text-lg text-gray-600 mb-4">
+        Arrastra tu archivo CSV aquí o haz click para seleccionarlo
+      </p>
+      <input 
+        type="file" 
+        accept=".csv" 
+        onChange={handleFileChange} 
+        className="hidden" 
+        id="fileInput"
+      />
+      <label 
+        htmlFor="fileInput" 
+        className="cursor-pointer bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700"
       >
-        <input
-          type="file"
-          id="fileInput"
-          className="hidden"
-          onChange={handleFileChange}
-        />
-        <label htmlFor="fileInput" className="flex flex-col items-center cursor-pointer">
-          <div className="text-6xl mb-4">📁</div>
-          <p className="text-gray-600">
-            {isDragging ? '¡Suéltalo aquí!' : 'Arrastra un archivo o haz clic para seleccionarlo'}
-          </p>
-        </label>
-      </div>
+        Seleccionar archivo
+      </label>
 
-      {showModal && selectedFile && (
-        <FilePreviewModal file={selectedFile} onClose={handleCancel} />
+      {showModal && fileToPreview && (
+        <FilePreviewModal 
+          file={fileToPreview} 
+          onClose={handleCloseModal}
+          setUploadedFiles={setUploadedFiles}
+        />
       )}
     </div>
   );

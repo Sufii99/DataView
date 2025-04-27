@@ -1,13 +1,13 @@
 import React from 'react';
 import UploadForm from './UploadForm';
 
-export default function MainContent({ activeSection, selectedFileId }) {
+export default function MainContent({ activeSection, selectedFileId, setUploadedFiles }) {
   return (
     <main className="flex-1 p-6 overflow-y-auto">
       {activeSection === 'upload' && (
         <div>
           <h1 className="text-3xl font-bold mb-6">Subir nuevo archivo</h1>
-          <UploadForm />
+          <UploadForm setUploadedFiles={setUploadedFiles} />
         </div>
       )}
 
