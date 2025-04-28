@@ -10,14 +10,14 @@ import './views/header/help_mobile.js';
 import './views/notifications/notification_slide.js';
 
 /* Componentes jsx */
-import BarChart from "./components/BarChart";
-import DashboardApp from './components/DashboardApp';
+import ChartDemo from './components/Home/ChartDemo.jsx';
+import DashboardApp from './components/Dashboard/DashboardApp.jsx';
 
 document.addEventListener("turbo:load", () => {
-  const d3Container = document.getElementById("d3-container");
-  if (d3Container) {
-    const rootD3 = createRoot(d3Container); 
-    rootD3.render(<BarChart />);
+  const chartDemoRoot = document.getElementById("chart-demo-root");
+  if (chartDemoRoot) {
+    const root = createRoot(chartDemoRoot);
+    root.render(<ChartDemo />);
   }
 
   const dashboardRoot = document.getElementById("dashboard-root");
