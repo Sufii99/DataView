@@ -1,19 +1,25 @@
 import React, { useRef, useEffect, useState } from "react";
 import * as d3 from "d3";
 
-const ModernBarChart = () => {
+const BarChart = () => {
   const svgRef = useRef();
+  const wrapperRef = useRef();
   const [data, setData] = useState([12, 25, 8, 15, 20]);
 
   useEffect(() => {
     const svg = d3.select(svgRef.current);
     svg.selectAll("*").remove();
 
-    const width = 600;
+    const wrapper = wrapperRef.current;
+    const width = wrapper.offsetWidth; // Ahora la anchura es dinámica
     const height = 400;
     const margin = { top: 40, right: 30, bottom: 40, left: 40 };
 
-    svg.attr("width", width).attr("height", height);
+    svg
+      .attr("width", width)
+      .attr("height", height)
+      .attr("viewBox", `0 0 ${width} ${height}`) // Para mantener escalabilidad en responsive
+      .attr("preserveAspectRatio", "xMidYMid meet");
 
     const x = d3.scaleBand()
       .domain(d3.range(data.length))
@@ -50,14 +56,14 @@ const ModernBarChart = () => {
       .attr("stroke-width", 2)
       .style("transition", "all 0.3s ease")
       .on("mouseover", function(event, d) {
-        d3.select(this).attr("fill", "#ff6347"); // Cambiar color al pasar el mouse
+        d3.select(this).attr("fill", "#ff6347");
         tooltip.style("visibility", "visible").text(`Valor: ${d}`);
       })
       .on("mousemove", function(event) {
         tooltip.style("top", `${event.pageY + 10}px`).style("left", `${event.pageX + 10}px`);
       })
       .on("mouseout", function() {
-        d3.select(this).attr("fill", "#6c5ce7"); // Restaurar color
+        d3.select(this).attr("fill", "#6c5ce7");
         tooltip.style("visibility", "hidden");
       });
 
@@ -79,11 +85,11 @@ const ModernBarChart = () => {
   }, [data]);
 
   return (
-    <div className="max-w-3xl mx-auto p-6">
+    <div ref={wrapperRef} className="max-w-3xl mx-auto p-6 w-full">
       <h2 className="text-2xl text-center font-semibold text-gray-900 mb-6">Gráfico de Barras</h2>
-      <svg ref={svgRef}></svg>
+      <svg ref={svgRef} className="w-full h-auto"></svg>
     </div>
   );
 };
 
-export default ModernBarChart;
+export default BarChart;

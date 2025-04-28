@@ -2,7 +2,7 @@
   <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
     
 	<div class="flex lg:flex-1">
-      <a href="#" class="-m-1.5 p-1.5">
+      <a href="/" class="-m-1.5 p-1.5">
         <span class="sr-only">Your Company</span>
         <img class="h-8 w-auto" src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600" alt="">
       </a>
@@ -20,7 +20,7 @@
 	<div class="hidden lg:flex lg:gap-x-12">
       <a href="/" class="nvar text-sm/6 font-semibold text-gray-900">Inicio</a>
       <a href="#" class="nvar text-sm/6 font-semibold text-gray-900">Guia</a>
-      <a href="/dashboard" class="nvar text-sm/6 font-semibold text-gray-900">Dashboard</a>
+      <a href="/dashboard" class="nvar text-sm/6 font-semibold text-gray-900">Panel</a>
 	    <div class="relative">
         <button type="button" class="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-900" aria-expanded="false">
           <span class="group relative inline-flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900 hover:text-blue-600 transition-colors duration-200">
@@ -33,66 +33,61 @@
 		
         <div class="absolute top-full -left-8 z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5 transition ease-in-out duration-200 opacity-0 translate-y-1 invisible">
           <div class="p-4">
-            <div class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm/6 hover:bg-gray-50 cursor-pointer">
+            
+            <a href="#" class="group relative flex w-full items-center gap-x-6 rounded-lg p-4 text-sm/6 hover:bg-gray-50 cursor-pointer">
               <div class="flex size-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                 <svg class="size-6 text-gray-600 group-hover:text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M12 14a4 4 0 1 0-4-4m4 4v2m0-14a10 10 0 1 0 0 20 10 10 0 0 0 0-20Z" />
                 </svg>
               </div>
-              <div class="flex-auto">
-                <a href="#" class="block font-semibold text-gray-900">
-                  FAQ
-                </a>
+              <div class="flex-auto font-semibold text-gray-900 text-left">
+                FAQ
               </div>
-            </div>
-            <div class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm/6 hover:bg-gray-50 cursor-pointer">
+            </a>
+
+            <a href="<%= contact_path %>" class="group relative flex w-full items-center gap-x-6 rounded-lg p-4 text-sm/6 hover:bg-gray-50 cursor-pointer">
               <div class="flex size-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                 <svg class="size-6 text-gray-600 group-hover:text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25H4.5A2.25 2.25 0 0 1 2.25 17.25V6.75m19.5 0a2.25 2.25 0 0 0-2.25-2.25H4.5A2.25 2.25 0 0 0 2.25 6.75m19.5 0L12 13.5 2.25 6.75" />
                 </svg>
               </div>
-              <div class="flex-auto">
-                <a href = "<%= contact_path %>" class="block font-semibold text-gray-900">
-                  Contacto
-                </a>
+              <div class="flex-auto font-semibold text-gray-900 text-left">
+                Contacto
               </div>
-            </div>
-            <div class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm/6 hover:bg-gray-50 cursor-pointer">
+            </a>
+
+            <a href="#" class="group relative flex w-full items-center gap-x-6 rounded-lg p-4 text-sm/6 hover:bg-gray-50 cursor-pointer">
               <div class="flex size-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                 <svg class="size-6 text-gray-600 group-hover:text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M7.864 4.243A7.5 7.5 0 0 1 19.5 10.5c0 2.92-.556 5.709-1.568 8.268M5.742 6.364A7.465 7.465 0 0 0 4.5 10.5a7.464 7.464 0 0 1-1.15 3.993m1.989 3.559A11.209 11.209 0 0 0 8.25 10.5a3.75 3.75 0 1 1 7.5 0c0 .527-.021 1.049-.064 1.565M12 10.5a14.94 14.94 0 0 1-3.6 9.75m6.633-4.596a18.666 18.666 0 0 1-2.485 5.33" />
                 </svg>
               </div>
-              <div class="flex-auto">
-                <a href="#" class="block font-semibold text-gray-900">
-                  Security
-                </a>
+              <div class="flex-auto font-semibold text-gray-900 text-left">
+                Security
               </div>
-            </div>
-            <div class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm/6 hover:bg-gray-50 cursor-pointer">
+            </a>
+
+            <a href="#" class="group relative flex w-full items-center gap-x-6 rounded-lg p-4 text-sm/6 hover:bg-gray-50 cursor-pointer">
               <div class="flex size-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                 <svg class="size-6 text-gray-600 group-hover:text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 0 0 2.25-2.25V6a2.25 2.25 0 0 0-2.25-2.25H6A2.25 2.25 0 0 0 3.75 6v2.25A2.25 2.25 0 0 0 6 10.5Zm0 9.75h2.25A2.25 2.25 0 0 0 10.5 18v-2.25a2.25 2.25 0 0 0-2.25-2.25H6a2.25 2.25 0 0 0-2.25 2.25V18A2.25 2.25 0 0 0 6 20.25Zm9.75-9.75H18a2.25 2.25 0 0 0 2.25-2.25V6A2.25 2.25 0 0 0 18 3.75h-2.25A2.25 2.25 0 0 0 13.5 6v2.25a2.25 2.25 0 0 0 2.25 2.25Z" />
                 </svg>
               </div>
-              <div class="flex-auto">
-                <a href="#" class="block font-semibold text-gray-900">
-                  Integrations
-                </a>
+              <div class="flex-auto font-semibold text-gray-900 text-left">
+                Integrations
               </div>
-            </div>
-            <div class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm/6 hover:bg-gray-50 cursor-pointer">
+            </a>
+
+            <a href="#" class="group relative flex w-full items-center gap-x-6 rounded-lg p-4 text-sm/6 hover:bg-gray-50 cursor-pointer">
               <div class="flex size-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                 <svg class="size-6 text-gray-600 group-hover:text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
                 </svg>
               </div>
-              <div class="flex-auto">
-                <a href="#" class="block font-semibold text-gray-900">
-                  Automations
-                </a>
+              <div class="flex-auto font-semibold text-gray-900 text-left">
+                Automations
               </div>
-            </div>
+            </a>
           </div>
         </div>
       </div>
@@ -112,30 +107,30 @@
           <div class="absolute top-full right-0 z-10 mt-3 w-64 overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5 opacity-0 translate-y-1 invisible group-hover:opacity-100 group-hover:translate-y-0 group-hover:visible transition-all duration-200 ease-in-out">
             <div class="p-4">
               <!-- Configurar perfil -->
-              <div class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm hover:bg-gray-50 cursor-pointer">
+              <a href="<%= edit_user_registration_path %>" class="group relative flex w-full items-center gap-x-6 rounded-lg p-4 text-sm hover:bg-gray-50 cursor-pointer">
                 <div class="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                   <svg class="h-6 w-6 text-gray-600 group-hover:text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                   </svg>
                 </div>
-                <div class="flex-auto">
-                  <a href="<%= edit_user_registration_path %>" class="block font-semibold text-gray-900">
-                    Configurar perfil
-                  </a>
+                <div class="flex-auto font-semibold text-gray-900 text-left">
+                  Configurar perfil
                 </div>
-              </div>
+              </a>
 
               <!-- Cerrar sesión -->
-              <div class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm hover:bg-gray-50 cursor-pointer">
-                <div class="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                  <svg class="h-6 w-6 text-gray-600 group-hover:text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3H6.75A2.25 2.25 0 004.5 5.25v13.5A2.25 2.25 0 006.75 21H13.5a2.25 2.25 0 002.25-2.25V15m3-3h-9m9 0l-3-3m3 3l-3 3" />
-                  </svg>
-                </div>
-                  <%= form_with url: destroy_user_session_path, method: :delete do %>
-                    <button type="submit" class="block font-semibold text-gray-900">Cerrar sesión</button>
-                  <% end %>
-                </div>
+              <%= form_with url: destroy_user_session_path, method: :delete do %>
+                <button type="submit" class="group relative flex w-full items-center gap-x-6 rounded-lg p-4 text-sm hover:bg-gray-50 cursor-pointer">
+                  <div class="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+                    <svg class="h-6 w-6 text-gray-600 group-hover:text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3H6.75A2.25 2.25 0 004.5 5.25v13.5A2.25 2.25 0 006.75 21H13.5a2.25 2.25 0 002.25-2.25V15m3-3h-9m9 0l-3-3m3 3l-3 3" />
+                    </svg>
+                  </div>
+                  <div class="flex-auto font-semibold text-gray-900 text-left">
+                    Cerrar sesión
+                  </div>
+                </button>
+              <% end %>
             </div>
           </div>
         </div>
@@ -147,46 +142,63 @@
     </div>
   </nav>
   
-  <!-- Mobile menu, show/hide based on menu open state. -->
-  <div id = "mobile-menu" class="hidden" role="dialog" aria-modal="true">
-    <!-- Background backdrop, show/hide based on slide-over state. -->
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden" role="dialog" aria-modal="true">
     <div class="fixed inset-0 z-10"></div>
     <div class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
       <div class="flex items-center justify-between">
-        <a href="#" class="-m-1.5 p-1.5">
+        <a href="/" class="-m-1.5 p-1.5">
           <span class="sr-only">Your Company</span>
           <img class="h-8 w-auto" src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600" alt="">
         </a>
-        <button id = "close-menu" type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
+        <button id="close-menu" type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
           <span class="sr-only">Close menu</span>
-          <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+          <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>
+
       <div class="mt-6 flow-root">
         <div class="-my-6 divide-y divide-gray-500/10">
           <div class="space-y-2 py-6">
+            <!-- Secciones principales -->
+            <a href="/" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-50">Inicio</a>
+            <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-50">Guía</a>
+            <a href="/dashboard" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-50">Panel</a>
+
+            <!-- Dropdown Ayuda -->
             <div class="-mx-3">
-			<button type="button" class="flex w-full items-center justify-between rounded-lg py-2 pr-3.5 pl-3 text-base/7 font-semibold text-gray-900 hover:bg-gray-50" aria-controls="disclosure-1" aria-expanded="false" id="toggle-menu">
-				Product
-				<svg id="toggle-icon" class="size-5 flex-none" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-				<path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
-				</svg>
-			</button>
-			<div class="mt-2 space-y-2 hidden" id="disclosure-1">
-				<a href="#" class="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-gray-900 hover:bg-gray-50">Analytics</a>
-				<a href="#" class="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-gray-900 hover:bg-gray-50">Engagement</a>
-				<a href="#" class="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-gray-900 hover:bg-gray-50">Security</a>
-				<a href="#" class="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-gray-900 hover:bg-gray-50">Integrations</a>
-			</div>
-			</div>
-            <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Features</a>
-            <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Marketplace</a>
-            <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Company</a>
+              <button type="button" class="flex w-full items-center justify-between rounded-lg px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-50" aria-controls="disclosure-help" aria-expanded="false" id="toggle-help">
+                Ayuda
+                <svg id="toggle-help-icon" class="h-5 w-5 flex-none" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                </svg>
+              </button>
+
+              <div id="disclosure-help" class="mt-2 space-y-2 hidden">
+                <a href="#" class="block rounded-lg py-2 pr-3 pl-6 text-sm font-semibold text-gray-900 hover:bg-gray-50">FAQ</a>
+                <a href="<%= contact_path %>" class="block rounded-lg py-2 pr-3 pl-6 text-sm font-semibold text-gray-900 hover:bg-gray-50">Contacto</a>
+                <a href="#" class="block rounded-lg py-2 pr-3 pl-6 text-sm font-semibold text-gray-900 hover:bg-gray-50">Security</a>
+                <a href="#" class="block rounded-lg py-2 pr-3 pl-6 text-sm font-semibold text-gray-900 hover:bg-gray-50">Integrations</a>
+                <a href="#" class="block rounded-lg py-2 pr-3 pl-6 text-sm font-semibold text-gray-900 hover:bg-gray-50">Automations</a>
+              </div>
+            </div>
           </div>
+
           <div class="py-6">
-            <a href="#" class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Log in</a>
+            <% if user_signed_in? %>
+              <div class="space-y-2">
+                <a href="<%= edit_user_registration_path %>" class="block rounded-lg px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-50">Configurar perfil</a>
+                <%= form_with url: destroy_user_session_path, method: :delete do %>
+                  <button type="submit" class="w-full text-left block rounded-lg px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-50">
+                    Cerrar sesión
+                  </button>
+                <% end %>
+              </div>
+            <% else %>
+              <a href="<%= new_user_session_path %>" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold text-gray-900 hover:bg-gray-50">Iniciar sesión</a>
+            <% end %>
           </div>
         </div>
       </div>
