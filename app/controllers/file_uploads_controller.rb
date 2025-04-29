@@ -1,3 +1,5 @@
+include Rails.application.routes.url_helpers  # Para añadir el helper de URL
+
 class FileUploadsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_file_upload, only: [ :destroy ]
@@ -54,7 +56,8 @@ class FileUploadsController < ApplicationController
       size_in_bytes: file.size_in_bytes,
       columns_count: file.columns_count,
       rows_count: file.rows_count,
-      created_at: file.created_at
+      created_at: file.created_at,
+      file_url: url_for(file.data_file)
     }
   end
 

@@ -39,7 +39,7 @@ export default function FilePreviewModal({ file, onClose, setUploadedFiles }) {
   
       if (response.ok) {
         const newFile = await response.json();
-        setUploadedFiles(prev => [...prev, newFile]);
+        setUploadedFiles(prev => [...prev, { ...newFile, previewData }]);
         alert('Archivo subido correctamente.');
         onClose();      
       } else {

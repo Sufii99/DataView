@@ -62,6 +62,7 @@ export default function DashboardApp() {
           activeSection={activeSection}
           selectedFileId={selectedFileId}
           setUploadedFiles={setUploadedFiles}
+          uploadedFiles={uploadedFiles}
         />
       </div>
     </div>

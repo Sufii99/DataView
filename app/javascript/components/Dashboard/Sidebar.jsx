@@ -24,17 +24,46 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen, activeSection, se
           <h3 className="text-lg font-semibold text-gray-600 mb-2">Archivos</h3>
           <div className="space-y-2">
             {uploadedFiles.map((file, index) => (
-              <button
-                key={index}
-                className="block w-full text-left text-gray-700 hover:text-indigo-600"
-                onClick={() => {
-                  setActiveSection('file');
-                  setSelectedFileId(index);
-                  setSidebarOpen(false);
-                }}
-              >
-                📄 {file.name}
-              </button>
+              <div key={index} className="flex justify-between items-center">
+                <button
+                  className="text-left text-gray-700 hover:text-indigo-600 flex-1"
+                  onClick={() => {
+                    setActiveSection('file');
+                    setSelectedFileId(index);
+                    setSidebarOpen(false);
+                  }}
+                >
+                  📄 {file.name}
+                </button>
+                <button
+                  onClick={async () => {
+                    if (confirm(`¿Seguro que quieres eliminar el archivo "${file.name}"?`)) {
+                      try {
+                        const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+                        const response = await fetch(`/file_uploads/${file.id}`, {
+                          method: 'DELETE',
+                          headers: {
+                            'X-CSRF-Token': csrfToken,
+                            'Accept': 'application/json',
+                          },
+                        });
+                        if (response.ok) {
+                          window.location.reload(); // Refrescamos para actualizar la lista de archivos
+                        } else {
+                          alert('Error al eliminar el archivo.');
+                        }
+                      } catch (error) {
+                        console.error('Error al eliminar:', error);
+                        alert('Error en la eliminación.');
+                      }
+                    }
+                  }}
+                  className="text-red-500 hover:text-red-700 ml-2"
+                  title="Eliminar archivo"
+                >
+                  🗑️
+                </button>
+              </div>
             ))}
           </div>
         </div>

@@ -1,7 +1,10 @@
 import React from 'react';
 import UploadForm from './UploadForm';
+import FileVisualizer from './FileVisualizer'; 
 
-export default function MainContent({ activeSection, selectedFileId, setUploadedFiles }) {
+export default function MainContent({ activeSection, selectedFileId, setUploadedFiles, uploadedFiles }) {
+  const selectedFile = uploadedFiles[selectedFileId] || null;
+
   return (
     <main className="flex-1 p-6 overflow-y-auto">
       {activeSection === 'upload' && (
@@ -11,10 +14,10 @@ export default function MainContent({ activeSection, selectedFileId, setUploaded
         </div>
       )}
 
-      {activeSection === 'file' && (
+      {activeSection === 'file' && selectedFile && (
         <div>
-          <h1 className="text-3xl font-bold mb-6">Archivo seleccionado</h1>
-          <p className="text-gray-700">Aquí verás la gráfica y la tabla del archivo {selectedFileId != null ? selectedFileId + 1 : ''}.</p>
+          <h1 className="text-3xl font-bold mb-6">Archivo: {selectedFile.name}</h1>
+          <FileVisualizer file={selectedFile} />
         </div>
       )}
 
