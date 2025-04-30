@@ -1,20 +1,40 @@
 /* Modal que muestra una vista previa del archivo antes de subirlo, permite asignar un nombre personalizado y enviarlo al backend */
 import React, { useState, useEffect } from 'react';
 import Papa from 'papaparse';
+import * as XLSX from 'xlsx';
 
 export default function FilePreviewModal({ file, onClose, setUploadedFiles }) {
   const [previewData, setPreviewData] = useState([]); // Primeras filas para mostrar como vista previa
   const [customName, setCustomName] = useState('');   // Nombre que el usuario introduce para guardar el archivo
 
   useEffect(() => {
-    /* Leemos el archivo localmente y mostramos una vista previa de las primeras filas */
+    const fileExt = file.name.split('.').pop().toLowerCase(); // Obtenemos la extensión del archivo
     const reader = new FileReader();
-    reader.onload = (event) => {
-      const csv = event.target.result;
-      const parsed = Papa.parse(csv, { header: true, preview: 5 });
-      setPreviewData(parsed.data);
-    };
-    reader.readAsText(file);
+
+    if (fileExt === 'csv') {
+      /* Parseo de archivos CSV (primeras 5 filas con cabecera) */
+      reader.onload = (event) => {
+        const csv = event.target.result;
+        const parsed = Papa.parse(csv, { header: true, preview: 5 });
+        setPreviewData(parsed.data); // Guardamos la vista previa
+      };
+      reader.readAsText(file);
+    }
+
+    else if (['xlsx', 'xls'].includes(fileExt)) {
+      /* Parseo de archivos Excel (primeras 5 filas de la primera hoja) */
+      reader.onload = (event) => {
+        const data = new Uint8Array(event.target.result);
+        const workbook = XLSX.read(data, { type: 'array' });
+        const sheet = workbook.Sheets[workbook.SheetNames[0]];
+        const rows = XLSX.utils.sheet_to_json(sheet, { defval: "" }).slice(0, 5);
+        setPreviewData(rows);
+      };
+      reader.readAsArrayBuffer(file);
+    } else {
+      /* Tipo de archivo no soportado para vista previa */
+      setPreviewData([]);
+    }
   }, [file]);
 
   /* Enviamos el archivo al backend junto con el nombre personalizado */
@@ -57,7 +77,7 @@ export default function FilePreviewModal({ file, onClose, setUploadedFiles }) {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-opacity-50 z-50">
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-3xl relative">
         <h2 className="text-2xl font-semibold mb-6">Vista previa del archivo</h2>
 
