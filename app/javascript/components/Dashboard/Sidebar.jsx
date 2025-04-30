@@ -1,3 +1,4 @@
+/* Componente lateral que permite navegar entre secciones del panel (subida, archivos, configuración) */
 import React from 'react';
 
 export default function Sidebar({ sidebarOpen, setSidebarOpen, activeSection, setActiveSection, setSelectedFileId, uploadedFiles }) {
@@ -82,3 +83,12 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen, activeSection, se
     </div>
   );
 }
+
+/*
+  - sidebarOpen: booleano que indica si el sidebar está visible (para diseño responsive).
+  - setSidebarOpen: función para cambiar el estado de visibilidad del sidebar.
+  - activeSection: string que indica la sección actualmente activa del panel ('upload', 'file', 'settings').
+  - setActiveSection: función para actualizar la sección activa.
+  - setSelectedFileId: función para seleccionar un archivo concreto (por su índice en la lista).
+  - uploadedFiles: array de archivos subidos (cada uno con al menos { id, name }).
+*/

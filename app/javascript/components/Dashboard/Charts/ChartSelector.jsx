@@ -1,13 +1,14 @@
+/* Componente que permite al usuario seleccionar tipo de gráfico, columnas y método de agregación para visualizar los datos */
 import React, { useState } from 'react';
 import BarChart from './BarChart';
 import LineChart from './LineChart';
 import PieChart from './PieChart';
 
 export default function ChartSelector({ data, columns }) {
-  const [chartType, setChartType] = useState('bar');
-  const [xColumn, setXColumn] = useState(columns[0]);
-  const [yColumn, setYColumn] = useState(columns[1] || columns[0]);
-  const [aggregation, setAggregation] = useState('sum');
+  const [chartType, setChartType] = useState('bar');                // Tipo de gráfico seleccionado
+  const [xColumn, setXColumn] = useState(columns[0]);               // Columna del eje X
+  const [yColumn, setYColumn] = useState(columns[1] || columns[0]); // Columna del eje Y o valores
+  const [aggregation, setAggregation] = useState('sum');            // Método de agregación aplicado a Y
 
   return (
     <div className="space-y-6">
@@ -25,7 +26,7 @@ export default function ChartSelector({ data, columns }) {
           </select>
         </div>
 
-        {/* Mostrar solo si no es un PieChart */}
+        {/* Mostrar solo si no es un PieChart (por ahora) */}
         {chartType !== 'pie' && (
           <>
             <div>
@@ -82,3 +83,8 @@ export default function ChartSelector({ data, columns }) {
     </div>
   );
 }
+
+/*
+  - data: array de objetos representando los datos del archivo paseado.
+  - columns: array con los nombres de columna detectados (cabeceras del archivo).
+*/

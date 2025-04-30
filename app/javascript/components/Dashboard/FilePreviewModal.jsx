@@ -1,11 +1,13 @@
+/* Modal que muestra una vista previa del archivo antes de subirlo, permite asignar un nombre personalizado y enviarlo al backend */
 import React, { useState, useEffect } from 'react';
 import Papa from 'papaparse';
 
 export default function FilePreviewModal({ file, onClose, setUploadedFiles }) {
-  const [previewData, setPreviewData] = useState([]);
-  const [customName, setCustomName] = useState('');
+  const [previewData, setPreviewData] = useState([]); // Primeras filas para mostrar como vista previa
+  const [customName, setCustomName] = useState('');   // Nombre que el usuario introduce para guardar el archivo
 
   useEffect(() => {
+    /* Leemos el archivo localmente y mostramos una vista previa de las primeras filas */
     const reader = new FileReader();
     reader.onload = (event) => {
       const csv = event.target.result;
@@ -15,6 +17,7 @@ export default function FilePreviewModal({ file, onClose, setUploadedFiles }) {
     reader.readAsText(file);
   }, [file]);
 
+  /* Enviamos el archivo al backend junto con el nombre personalizado */
   const handleSave = async () => {
     if (!customName.trim()) {
       alert('Por favor, escribe un nombre para el archivo.');
@@ -25,6 +28,7 @@ export default function FilePreviewModal({ file, onClose, setUploadedFiles }) {
     formData.append('name', customName);
     formData.append('file', file);
   
+    /* Extraemos el token CSRF desde el meta tag (para seguridad en Rails) */
     const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
   
     try {
@@ -32,7 +36,7 @@ export default function FilePreviewModal({ file, onClose, setUploadedFiles }) {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
-          'X-CSRF-Token': csrfToken,
+          'X-CSRF-Token': csrfToken,  // Para que Rails acepte la petición
         },
         body: formData,
       });
@@ -53,7 +57,7 @@ export default function FilePreviewModal({ file, onClose, setUploadedFiles }) {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+    <div className="fixed inset-0 flex items-center justify-center bg-opacity-50 z-50">
       <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-3xl relative">
         <h2 className="text-2xl font-semibold mb-6">Vista previa del archivo</h2>
 
@@ -115,3 +119,9 @@ export default function FilePreviewModal({ file, onClose, setUploadedFiles }) {
     </div>
   );
 }
+
+/*
+  - file: archivo CSV seleccionado localmente para subir.
+  - onClose: función que cierra el modal.
+  - setUploadedFiles: función para actualizar la lista global de archivos tras la subida.
+*/
