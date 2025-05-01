@@ -1,14 +1,21 @@
 /* Componente que permite al usuario seleccionar tipo de gráfico, columnas y método de agregación para visualizar los datos */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import BarChart from './BarChart';
 import LineChart from './LineChart';
 import PieChart from './PieChart';
 
 export default function ChartSelector({ data, columns }) {
   const [chartType, setChartType] = useState('bar');                // Tipo de gráfico seleccionado
-  const [xColumn, setXColumn] = useState(columns[0]);               // Columna del eje X
+  const [xColumn, setXColumn] = useState(columns[0]);               // Columna del eje X o categoría
   const [yColumn, setYColumn] = useState(columns[1] || columns[0]); // Columna del eje Y o valores
   const [aggregation, setAggregation] = useState('sum');            // Método de agregación aplicado a Y
+
+  /* Reseteamos los selectores de las columnas (evitar bug) */
+  useEffect(() => {
+    if (!columns || columns.length === 0) return;
+    setXColumn(columns[0]);
+    setYColumn(columns[1] || columns[0]);
+  }, [columns]);  
 
   return (
     <div className="space-y-6">
@@ -26,8 +33,8 @@ export default function ChartSelector({ data, columns }) {
           </select>
         </div>
 
-        {/* Mostrar solo si no es un PieChart (por ahora) */}
-        {chartType !== 'pie' && (
+        {/* Mostrar columnas a elegir según el tipo de gráfico */}
+        {chartType !== 'pie' ? (
           <>
             <div>
               <label className="block mb-2 font-semibold">Eje X</label>
@@ -43,6 +50,33 @@ export default function ChartSelector({ data, columns }) {
             </div>
             <div>
               <label className="block mb-2 font-semibold">Eje Y</label>
+              <select
+                value={yColumn}
+                onChange={(e) => setYColumn(e.target.value)}
+                className="w-full border rounded px-4 py-2"
+              >
+                {columns.map((col, idx) => (
+                  <option key={idx} value={col}>{col}</option>
+                ))}
+              </select>
+            </div>
+          </>
+        ) : (
+          <>
+            <div>
+              <label className="block mb-2 font-semibold">Categoría (etiqueta)</label>
+              <select
+                value={xColumn}
+                onChange={(e) => setXColumn(e.target.value)}
+                className="w-full border rounded px-4 py-2"
+              >
+                {columns.map((col, idx) => (
+                  <option key={idx} value={col}>{col}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="block mb-2 font-semibold">Valor numérico</label>
               <select
                 value={yColumn}
                 onChange={(e) => setYColumn(e.target.value)}
@@ -78,7 +112,7 @@ export default function ChartSelector({ data, columns }) {
         <LineChart data={data} xKey={xColumn} yKey={yColumn} aggregation={aggregation} />
       )}
       {chartType === 'pie' && (
-        <PieChart data={data} valueKey={yColumn} aggregation={aggregation} />
+        <PieChart data={data} categoryKey={xColumn} valueKey={yColumn} aggregation={aggregation} />
       )}
     </div>
   );
