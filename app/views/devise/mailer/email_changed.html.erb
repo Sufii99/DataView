@@ -1,7 +1,36 @@
-<p>Hello <%= @email %>!</p>
+<div style="font-family: sans-serif; max-width: 480px; margin: 0 auto; padding: 24px;">
+  <div style="text-align: center;">
+    
 
-<% if @resource.try(:unconfirmed_email?) %>
-  <p>We're contacting you to notify you that your email is being changed to <%= @resource.unconfirmed_email %>.</p>
-<% else %>
-  <p>We're contacting you to notify you that your email has been changed to <%= @resource.email %>.</p>
-<% end %>
+    <h2 style="font-size: 20px; font-weight: bold; color: #111827; margin-bottom: 24px;">
+      Notificación de cambio de correo electrónico
+    </h2>
+  </div>
+
+  <p style="font-size: 15px; color: #374151; margin-bottom: 16px;">
+    Hola <strong><%= @email %></strong>,
+  </p>
+
+  <% if @resource.try(:unconfirmed_email?) %>
+    <p style="font-size: 15px; color: #374151; margin-bottom: 16px;">
+      Te informamos de que estás intentando cambiar tu dirección de correo a
+      <strong><%= @resource.unconfirmed_email %></strong>.  
+      Este cambio no será efectivo hasta que confirmes el nuevo correo.
+    </p>
+  <% else %>
+    <p style="font-size: 15px; color: #374151; margin-bottom: 16px;">
+      Te informamos de que tu dirección de correo electrónico ha sido cambiada correctamente a
+      <strong><%= @resource.email %></strong>.
+    </p>
+  <% end %>
+
+  <p style="font-size: 14px; color: #6b7280;">
+    Si no has realizado este cambio, por favor contacta con el soporte de <strong>DataView</strong> lo antes posible.
+  </p>
+
+  <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 32px 0;" />
+
+  <p style="font-size: 12px; color: #9ca3af; text-align: center;">
+    Este es un mensaje automático de <strong>DataView</strong>. No respondas a este correo.
+  </p>
+</div>
