@@ -2,22 +2,22 @@ require "test_helper"
 
 class PagesControllerTest < ActionDispatch::IntegrationTest
   test "should get guide" do
-    get pages_guide_url
+    get "/guide"
     assert_response :success
   end
 
   test "should get faq" do
-    get pages_faq_url
+    get "/faq"
     assert_response :success
   end
 
   test "should get terms" do
-    get pages_terms_url
+    get "/terms"
     assert_response :success
   end
 
   test "should get privacy" do
-    get pages_privacy_url
+    get "/privacy"
     assert_response :success
   end
 end
