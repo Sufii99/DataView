@@ -10,7 +10,9 @@
     <p class="mt-2 text-lg text-gray-600">¿Tienes dudas o sugerencias? Estamos para ayudarte.</p>
   </div>
 
-  <form action="#" method="POST" class="mx-auto mt-16 max-w-xl sm:mt-20">
+  <form action="/contacto" method="POST" class="mx-auto mt-16 max-w-xl sm:mt-20">
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
     <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
       <div>
         <label for="first-name" class="block text-sm font-semibold text-gray-900">Nombre</label>
@@ -42,7 +44,7 @@
                 <option selected>ES</option>
               </select>
             </div>
-            <input type="text" name="phone-number" id="phone-number" class="block min-w-0 grow py-1.5 pr-3 pl-2 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm" placeholder="+34 612 345 678">
+            <input type="text" name="phone-number" id="phone-number" class="block min-w-0 grow py-1.5 pr-3 pl-2 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm" placeholder="612 345 678">
           </div>
         </div>
       </div>
