@@ -11,4 +11,8 @@ class User < ApplicationRecord
   validates :last_name, presence: true
 
   has_many :file_uploads, dependent: :destroy
+
+  def admin?
+    self.admin
+  end
 end

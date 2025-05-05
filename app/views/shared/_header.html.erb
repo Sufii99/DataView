@@ -17,10 +17,15 @@
       </button>
     </div>
     
-	<div class="hidden lg:flex lg:gap-x-12">
-      <a href="/" class="nvar text-sm/6 font-semibold text-gray-900">Inicio</a>
-      <a href="/guide" class="nvar text-sm/6 font-semibold text-gray-900">Guia</a>
-      <a href="/dashboard" class="nvar text-sm/6 font-semibold text-gray-900">Panel</a>
+	  <div class="hidden lg:flex lg:gap-x-12">
+      <%= link_to "Inicio", root_path, class: "nvar text-sm font-semibold text-gray-900" %>
+      <%= link_to "Guía", guide_path, class: "nvar text-sm font-semibold text-gray-900" %>
+      <%= link_to "Panel", dashboard_path, class: "nvar text-sm font-semibold text-gray-900" %>
+
+      <% if current_user&.admin? %>
+        <%= link_to "Administración", admin_users_path, class: "nvar text-sm font-semibold text-gray-900" %>
+      <% end %>
+
 	    <div class="relative">
         <button type="button" class="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-900" aria-expanded="false">
           <span class="group relative inline-flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900 hover:text-blue-600 transition-colors duration-200">

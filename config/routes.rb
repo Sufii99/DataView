@@ -19,4 +19,8 @@ Rails.application.routes.draw do
   get "/faq", to: "pages#faq"
   get "/terms", to: "pages#terms"
   get "/privacy", to: "pages#privacy"
+
+  namespace :admin do
+    resources :users, only: [ :index, :destroy ]
+  end
 end
