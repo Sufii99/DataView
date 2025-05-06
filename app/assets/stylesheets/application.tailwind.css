@@ -3,3 +3,19 @@
 .group.is-open, .nvar:hover {
     color: #2563eb;
 }
+
+@keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 0.15s ease-out forwards;
+  }
+  

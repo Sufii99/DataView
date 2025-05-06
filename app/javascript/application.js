@@ -12,6 +12,7 @@ import './views/notifications/notification_slide.js';
 /* Componentes jsx */
 import ChartDemo from './components/Home/ChartDemo.jsx';
 import DashboardApp from './components/Dashboard/DashboardApp.jsx';
+import AdminPanel from './components/Administration/AdminPanel.jsx';
 
 document.addEventListener("turbo:load", () => {
   const chartDemoRoot = document.getElementById("chart-demo-root");
@@ -24,5 +25,11 @@ document.addEventListener("turbo:load", () => {
   if (dashboardRoot) {
     const root = createRoot(dashboardRoot);
     root.render(<DashboardApp />);
+  }
+
+  const container = document.getElementById("admin-panel")
+  if (container) {
+    const root = createRoot(container)
+    root.render(<AdminPanel />)
   }
 });

@@ -20,7 +20,11 @@ Rails.application.routes.draw do
   get "/terms", to: "pages#terms"
   get "/privacy", to: "pages#privacy"
 
-  namespace :admin do
-    resources :users, only: [ :index, :destroy ]
+  namespace :api do
+    namespace :admin do
+      resources :users, only: [ :index, :destroy ]
+    end
   end
+
+  get "admin/panel", to: "admin#panel", as: :admin_panel
 end

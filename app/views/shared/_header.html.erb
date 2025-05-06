@@ -23,7 +23,7 @@
       <%= link_to "Panel", dashboard_path, class: "nvar text-sm font-semibold text-gray-900" %>
 
       <% if current_user&.admin? %>
-        <%= link_to "Administración", admin_users_path, class: "nvar text-sm font-semibold text-gray-900" %>
+        <%= link_to "Administración", admin_panel_path, class: "nvar text-sm font-semibold text-gray-900" %>
       <% end %>
 
 	    <div class="relative">
