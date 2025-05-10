@@ -65,3 +65,6 @@ group :test do
 end
 
 gem "devise"
+
+gem "roo"
+gem "csv", require: false

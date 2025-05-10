@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       resources :users, only: [ :index, :destroy ] do
         collection do
           get :countries_distribution
+          get :registration_stats
         end
       end
     end

@@ -1,4 +1,7 @@
-include Rails.application.routes.url_helpers  # Para añadir el helper de URL
+include Rails.application.routes.url_helpers
+
+require "csv"
+require "roo"
 
 class FileUploadsController < ApplicationController
   before_action :authenticate_user!
@@ -21,6 +24,11 @@ class FileUploadsController < ApplicationController
         @file_upload.original_filename = @file_upload.data_file.filename.to_s
         @file_upload.size_in_bytes = @file_upload.data_file.byte_size
         @file_upload.file_type = detect_file_type(@file_upload.data_file)
+
+        # Calcular filas y columnas
+        rows, columns = count_rows_and_columns(@file_upload.data_file, @file_upload.file_type)
+        @file_upload.rows_count = rows
+        @file_upload.columns_count = columns
       end
     end
 
@@ -69,6 +77,31 @@ class FileUploadsController < ApplicationController
       "xlsx"
     else
       "unknown"
+    end
+  end
+
+  def count_rows_and_columns(attached_file, file_type)
+    file_path = ActiveStorage::Blob.service.send(:path_for, attached_file.blob.key)
+
+    case file_type
+    when "csv"
+      rows = 0
+      max_cols = 0
+      CSV.foreach(file_path, headers: true) do |row|
+        rows += 1
+        max_cols = [ max_cols, row.fields.count ].max
+      end
+      [ rows, max_cols ]
+
+    when "xlsx"
+      spreadsheet = Roo::Spreadsheet.open(file_path, extension: :xlsx)
+      sheet = spreadsheet.sheet(0)
+      rows = sheet.last_row.to_i - sheet.first_row.to_i + 1
+      columns = sheet.last_column.to_i
+      [ rows, columns ]
+
+    else
+      [ 0, 0 ]
     end
   end
 end

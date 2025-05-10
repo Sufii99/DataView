@@ -1,28 +1,32 @@
 document.addEventListener("turbo:load", function () {
-  const openBtn = document.getElementById("open-menu");
-  const closeBtn = document.getElementById("close-menu");
-  const mobileMenu = document.getElementById("mobile-menu");
+  const openBtn = document.getElementById("open-menu")
+  const closeBtn = document.getElementById("close-menu")
+  const mobileMenu = document.getElementById("mobile-menu")
 
-  openBtn.addEventListener("click", () => {
-    mobileMenu.classList.remove("hidden");
-  });
+  if (openBtn && mobileMenu) {
+    openBtn.addEventListener("click", () => {
+      mobileMenu.classList.remove("hidden")
+    })
+  }
 
-  closeBtn.addEventListener("click", () => {
-    mobileMenu.classList.add("hidden");
-  });
-});
+  if (closeBtn && mobileMenu) {
+    closeBtn.addEventListener("click", () => {
+      mobileMenu.classList.add("hidden")
+    })
+  }
+})
 
 document.addEventListener("turbo:load", function () {
-  const toggleBtn = document.getElementById("toggle-menu");
-  const subMenu = document.getElementById("disclosure-1");
-  const toggleIcon = document.getElementById("toggle-icon");
+  const toggleBtn = document.getElementById("toggle-help")
+  const subMenu = document.getElementById("disclosure-help")
+  const toggleIcon = document.getElementById("toggle-help-icon")
 
-  toggleBtn.addEventListener("click", function () {
-    // Alternar la clase 'hidden' para mostrar/ocultar el submenú
-    subMenu.classList.toggle("hidden");
+  if (toggleBtn && subMenu && toggleIcon) {
+    toggleBtn.addEventListener("click", function () {
+      subMenu.classList.toggle("hidden")
 
-    // Cambiar la dirección de la flecha dependiendo del estado del submenú
-    const isExpanded = !subMenu.classList.contains("hidden");
-    toggleIcon.style.transform = isExpanded ? "rotate(180deg)" : "rotate(0deg)";
-  });
-});
+      const isExpanded = !subMenu.classList.contains("hidden")
+      toggleIcon.style.transform = isExpanded ? "rotate(180deg)" : "rotate(0deg)"
+    })
+  }
+})

@@ -82,7 +82,7 @@ export default function WorldMapChart({ countryData }) {
 
   return (
     <div className="bg-white shadow-md rounded-2xl p-4 w-full">
-      <h2 className="text-base text-center font-semibold text-gray-800 mb-3">Usuarios por país</h2>
+      <h2 className="text-lg font-semibold text-gray-800 text-center mb-4">Usuarios por país</h2>
       <div ref={mapRef} className="w-full" />
       {selectedCountry && (
         <p className="mt-4 text-sm text-center text-gray-700">

@@ -3,6 +3,7 @@ import FlashNotification from "../shared/FlashNotification"
 import ConfirmModal from "../shared/ConfirmModal"
 import RoleDistributionChart from "./RoleDistributionChart"
 import WorldMapChart from "./WorldMapChart"
+import UserRegistrationChart from "./UserRegistrationChart"
 
 export default function AdminPanel() {
   const [users, setUsers] = useState([])
@@ -123,11 +124,15 @@ export default function AdminPanel() {
             )}
           </div>
 
-          {/* Gráfica de Roles de usuario */}
-          <RoleDistributionChart users={users} />
+          {/* Gráfica de Roles de usuario y usuarios registrados */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <RoleDistributionChart users={users} />
+            <UserRegistrationChart />
+          </div>
 
           {/* Gráfica de Distribución de usuarios por país */}
           <WorldMapChart countryData={countryStats} />
+
         </div>
       </div>
 

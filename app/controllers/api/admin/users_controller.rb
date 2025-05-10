@@ -24,6 +24,18 @@ module Api
         render json: data
       end
 
+      def registration_stats
+        date_trunc = Arel.sql("DATE_TRUNC('month', created_at)")
+
+        stats = User
+          .group(date_trunc)
+          .order(date_trunc)
+          .count
+          .map { |date, count| { date: date.strftime("%Y-%m"), count: count } }
+
+        render json: stats
+      end
+
       private
 
       def require_admin
