@@ -1,4 +1,4 @@
-/* Componente que renderiza un gráfico de barras apiladas */
+/* Componente que renderiza un gráfico de barras apiladas al estilo BarChart */
 import React, { useRef, useEffect } from 'react';
 import * as d3 from 'd3';
 import { toPng } from 'html-to-image';
@@ -27,20 +27,13 @@ export default function StackedBarChart({ data, xKey, yKey, stackKey, aggregatio
 
     const wrapper = wrapperRef.current;
     const width = wrapper.offsetWidth;
-    const height = 460;
-    const margin = { top: 50, right: 30, bottom: 60, left: 100 };
+    const height = 420;
+    const margin = { top: 60, right: 30, bottom: 60, left: 100 };
 
-    // Obtener productos realmente existentes por categoría
-    const categoryToProducts = d3.group(data, d => d[xKey]);
-    const stackKeys = Array.from(
-      new Set(
-        Array.from(categoryToProducts.values()).flatMap(group =>
-          group.map(d => d[stackKey])
-        )
-      )
+    const allStackKeys = Array.from(
+      new Set(data.map(d => d[stackKey]))
     ).filter(k => typeof k === 'string' || typeof k === 'number');
 
-    // Agrupación por xKey y stackKey
     const grouped = d3.rollup(
       data,
       values => aggregation === 'mean'
@@ -50,8 +43,7 @@ export default function StackedBarChart({ data, xKey, yKey, stackKey, aggregatio
       d => d[stackKey]
     );
 
-    // Construcción del array para stack()
-    const stackedData = Array.from(grouped, ([xVal, innerMap]) => {
+    const processedData = Array.from(grouped, ([xVal, innerMap]) => {
       const row = { [xKey]: xVal };
       for (const k of innerMap.keys()) {
         row[k] = innerMap.get(k);
@@ -67,31 +59,27 @@ export default function StackedBarChart({ data, xKey, yKey, stackKey, aggregatio
     });
 
     const x = d3.scaleBand()
-      .domain(stackedData.map(d => String(d[xKey])))
+      .domain(processedData.map(d => String(d[xKey])))
       .range([margin.left, width - margin.right])
       .padding(0.25);
 
     const y = d3.scaleLinear()
-      .domain([
-        0,
-        d3.max(stackedData, d =>
-          d3.sum(stackKeys, k => d[k] || 0)
-        ) || 0
-      ])
+      .domain([0, d3.max(processedData, d =>
+        d3.sum(allStackKeys, k => d[k] || 0)
+      ) || 0])
       .nice()
       .range([height - margin.bottom, margin.top]);
 
     const color = d3.scaleOrdinal()
-      .domain(stackKeys)
+      .domain(allStackKeys)
       .range(d3.schemeTableau10);
 
     const stack = d3.stack()
-      .keys(stackKeys)
+      .keys(allStackKeys)
       .value((d, key) => d[key] || 0);
 
-    const series = stack(stackedData);
+    const series = stack(processedData);
 
-    // Tooltip
     const tooltip = d3.select(wrapper)
       .append('div')
       .attr('class', 'absolute pointer-events-none bg-gray-900 text-white text-xs px-3 py-1.5 rounded-lg opacity-0 transition-opacity duration-200 shadow-xl backdrop-blur')
@@ -118,35 +106,44 @@ export default function StackedBarChart({ data, xKey, yKey, stackKey, aggregatio
       .selectAll('text')
       .style('font-size', '12px');
 
-    // Barras apiladas
+    // Dibujar barras con animación y esquinas redondeadas
     svg.selectAll('g.layer')
       .data(series)
       .join('g')
-      .attr('fill', d => color(d.key))
       .attr('class', 'layer')
+      .attr('fill', d => color(d.key))
       .selectAll('rect')
       .data(d => d)
       .join('rect')
       .attr('x', d => x(String(d.data[xKey])))
-      .attr('y', d => y(d[1]))
-      .attr('height', d => y(d[0]) - y(d[1]))
       .attr('width', x.bandwidth())
+      .attr('rx', 4)
+      .attr('y', y(0))
+      .attr('height', 0)
       .on('mouseover', function (event, d) {
-        const stackName = d3.select(this.parentNode).datum().key;
+        const key = d3.select(this.parentNode).datum().key;
+        d3.select(this).attr('fill', d3.color(color(key)).darker(0.7));
         tooltip
           .style('opacity', 1)
-          .html(`<strong>${String(d.data[xKey])}</strong><br/>${stackName}: ${(d[1] - d[0]).toFixed(2)}`)
+          .html(`<strong>${d.data[xKey]}</strong><br/>${key}: ${(d[1] - d[0]).toFixed(2)}`)
           .style('left', `${event.offsetX + 12}px`)
           .style('top', `${event.offsetY - 35}px`);
       })
-      .on('mousemove', function (event) {
+      .on('mousemove', event => {
         tooltip
           .style('left', `${event.offsetX + 12}px`)
           .style('top', `${event.offsetY - 35}px`);
       })
       .on('mouseout', function () {
+        const key = d3.select(this.parentNode).datum().key;
+        d3.select(this).attr('fill', color(key));
         tooltip.style('opacity', 0);
-      });
+      })
+      .transition()
+      .duration(1000)
+      .ease(d3.easeCubicOut)
+      .attr('y', d => y(d[1]))
+      .attr('height', d => y(d[0]) - y(d[1]));
 
     // Etiquetas
     svg.append('text')

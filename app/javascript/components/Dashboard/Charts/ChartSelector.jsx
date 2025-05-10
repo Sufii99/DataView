@@ -6,13 +6,13 @@ import PieChart from './PieChart';
 import StackedBarChart from './StackedBarChart';
 
 export default function ChartSelector({ data, columns }) {
-  const [chartType, setChartType] = useState('bar');                // Tipo de gráfico seleccionado
-  const [xColumn, setXColumn] = useState(columns[0]);               // Columna del eje X o categoría
-  const [yColumn, setYColumn] = useState(columns[1] || columns[0]); // Columna del eje Y o valores
-  const [stackColumn, setStackColumn] = useState(columns[2] || columns[0]); // Columna secundaria para barras apiladas
-  const [aggregation, setAggregation] = useState('sum');            // Método de agregación aplicado a Y
+  const [chartType, setChartType] = useState('bar');
+  const [xColumn, setXColumn] = useState(columns[0]);
+  const [yColumn, setYColumn] = useState(columns[1] || columns[0]);
+  const [stackColumn, setStackColumn] = useState(columns[2] || columns[0]);
+  const [aggregation, setAggregation] = useState('sum');
+  const [color, setColor] = useState('#4f46e5'); // Color para barras o línea
 
-  /* Reseteamos los selectores al cambiar columnas */
   useEffect(() => {
     if (!columns || columns.length === 0) return;
     setXColumn(columns[0]);
@@ -23,6 +23,7 @@ export default function ChartSelector({ data, columns }) {
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {/* Tipo de gráfico */}
         <div>
           <label className="block mb-2 font-semibold">Tipo de Gráfico</label>
           <select
@@ -108,7 +109,7 @@ export default function ChartSelector({ data, columns }) {
           </>
         )}
 
-        {/* Selector de agregación */}
+        {/* Tipo de agregación */}
         <div>
           <label className="block mb-2 font-semibold">Tipo de Agregación</label>
           <select
@@ -120,26 +121,64 @@ export default function ChartSelector({ data, columns }) {
             <option value="mean">Media</option>
           </select>
         </div>
+
+        {/* Selector de color si aplica */}
+        {(chartType === 'bar' || chartType === 'line') && (
+          <div>
+            <label className="block mb-2 font-semibold">
+              Color {chartType === 'line' ? 'de la línea' : 'de las barras'}
+            </label>
+            <input
+              type="color"
+              value={color}
+              onChange={(e) => setColor(e.target.value)}
+              className="w-full h-[42px] rounded cursor-pointer border"
+            />
+          </div>
+        )}
       </div>
 
-      {/* Gráfico renderizado */}
+      {/* Renderizado del gráfico */}
       {chartType === 'bar' && (
-        <BarChart data={data} xKey={xColumn} yKey={yColumn} aggregation={aggregation} />
+        <BarChart
+          data={data}
+          xKey={xColumn}
+          yKey={yColumn}
+          aggregation={aggregation}
+          barColor={color}
+        />
       )}
       {chartType === 'line' && (
-        <LineChart data={data} xKey={xColumn} yKey={yColumn} aggregation={aggregation} />
+        <LineChart
+          data={data}
+          xKey={xColumn}
+          yKey={yColumn}
+          aggregation={aggregation}
+          lineColor={color}
+        />
       )}
       {chartType === 'pie' && (
-        <PieChart data={data} categoryKey={xColumn} valueKey={yColumn} aggregation={aggregation} />
+        <PieChart
+          data={data}
+          categoryKey={xColumn}
+          valueKey={yColumn}
+          aggregation={aggregation}
+        />
       )}
       {chartType === 'stacked' && (
-        <StackedBarChart data={data} xKey={xColumn} yKey={yColumn} stackKey={stackColumn} aggregation={aggregation} />
+        <StackedBarChart
+          data={data}
+          xKey={xColumn}
+          yKey={yColumn}
+          stackKey={stackColumn}
+          aggregation={aggregation}
+        />
       )}
     </div>
   );
 }
 
 /*
-  - data: array de objetos representando los datos del archivo paseado.
+  - data: array de objetos representando los datos del archivo parseado.
   - columns: array con los nombres de columna detectados (cabeceras del archivo).
 */

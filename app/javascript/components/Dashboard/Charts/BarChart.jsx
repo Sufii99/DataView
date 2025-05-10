@@ -3,11 +3,11 @@ import React, { useRef, useEffect } from 'react';
 import * as d3 from 'd3';
 import { toPng } from 'html-to-image';
 
-export default function BarChart({ data, xKey, yKey, aggregation }) {
+export default function BarChart({ data, xKey, yKey, aggregation, barColor = '#4f46e5' }) {
   const svgRef = useRef();
   const wrapperRef = useRef();
 
-  /* Generar y descargar imagen del grafico como PNG */
+  /* Generar y descargar imagen del gráfico como PNG */
   const handleDownload = () => {
     if (!wrapperRef.current) return;
     toPng(wrapperRef.current).then((dataUrl) => {
@@ -43,12 +43,12 @@ export default function BarChart({ data, xKey, yKey, aggregation }) {
     ).sort((a, b) => {
       const valA = a[xKey];
       const valB = b[xKey];
-    
+
       if (typeof valA === "string" && typeof valB === "string") {
         return valA.localeCompare(valB);
       }
       return valA > valB ? 1 : valA < valB ? -1 : 0;
-    });    
+    });
 
     /* Tooltip personalizado */
     const tooltip = d3.select(wrapper)
@@ -103,9 +103,9 @@ export default function BarChart({ data, xKey, yKey, aggregation }) {
       .attr('y', y(0))
       .attr('height', 0)
       .attr('rx', 4)
-      .attr('fill', '#4f46e5')
+      .attr('fill', barColor)
       .on('mouseover', function (event, d) {
-        d3.select(this).attr('fill', '#4338ca');
+        d3.select(this).attr('fill', d3.color(barColor).darker(0.7));
         tooltip
           .style('opacity', 1)
           .html(`<strong>${d[xKey]}</strong><br/>${yKey}: ${d[yKey].toFixed(2)}`)
@@ -118,7 +118,7 @@ export default function BarChart({ data, xKey, yKey, aggregation }) {
           .style('top', `${event.offsetY - 35}px`);
       })
       .on('mouseout', function () {
-        d3.select(this).attr('fill', '#4f46e5');
+        d3.select(this).attr('fill', barColor);
         tooltip.style('opacity', 0);
       })
       .transition()
@@ -127,7 +127,7 @@ export default function BarChart({ data, xKey, yKey, aggregation }) {
       .attr('y', d => y(+d[yKey]))
       .attr('height', d => y(0) - y(+d[yKey]));
 
-    /* Etiqueta eje Y (con nombre de la columna y tipo de agregación) */
+    /* Etiqueta eje Y */
     svg.append('text')
       .attr('transform', `rotate(-90)`)
       .attr('y', 18)
@@ -145,7 +145,7 @@ export default function BarChart({ data, xKey, yKey, aggregation }) {
       .style('fill', '#374151')
       .style('font-size', '12px')
       .text(xKey);
-  }, [data, xKey, yKey, aggregation]);
+  }, [data, xKey, yKey, aggregation, barColor]);
 
   return (
     <div className="relative">
@@ -167,4 +167,5 @@ export default function BarChart({ data, xKey, yKey, aggregation }) {
   - xKey: nombre de la columna para el eje X.
   - yKey: nombre de la columna para el eje Y.
   - aggregation: método de agregación ('sum' o 'mean') para los valores de Y.
+  - barColor: color hexadecimal o válido en CSS para las barras (por defecto '#4f46e5').
 */

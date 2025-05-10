@@ -1,9 +1,9 @@
-/* Componente que renderiza un gráfico de lineas */
+/* Componente que renderiza un gráfico de líneas */
 import React, { useRef, useEffect } from 'react';
 import * as d3 from 'd3';
 import { toPng } from 'html-to-image';
 
-export default function LineChart({ data, xKey, yKey, aggregation }) {
+export default function LineChart({ data, xKey, yKey, aggregation, lineColor = '#3b82f6' }) {
   const svgRef = useRef();
   const wrapperRef = useRef();
 
@@ -43,13 +43,11 @@ export default function LineChart({ data, xKey, yKey, aggregation }) {
     ).sort((a, b) => {
       const valA = a[xKey];
       const valB = b[xKey];
-    
       if (typeof valA === "string" && typeof valB === "string") {
         return valA.localeCompare(valB);
       }
-    
       return valA > valB ? 1 : valA < valB ? -1 : 0;
-    });    
+    });
 
     /* Tooltip personalizado */
     const tooltip = d3.select(wrapper)
@@ -98,7 +96,7 @@ export default function LineChart({ data, xKey, yKey, aggregation }) {
     const path = svg.append("path")
       .datum(aggregatedData)
       .attr("fill", "none")
-      .attr("stroke", "#3b82f6")
+      .attr("stroke", lineColor)
       .attr("stroke-width", 3)
       .attr("d", line);
 
@@ -119,9 +117,9 @@ export default function LineChart({ data, xKey, yKey, aggregation }) {
       .attr("cx", d => x(d[xKey]))
       .attr("cy", d => y(+d[yKey]))
       .attr("r", 4)
-      .attr("fill", "#3b82f6")
+      .attr("fill", lineColor)
       .on("mouseover", function (event, d) {
-        d3.select(this).attr("fill", "#1e40af");
+        d3.select(this).attr("fill", d3.color(lineColor).darker(0.7));
         tooltip
           .style("opacity", 1)
           .html(`<strong>${d[xKey]}</strong><br/>${yKey}: ${d[yKey].toFixed(2)}`)
@@ -134,7 +132,7 @@ export default function LineChart({ data, xKey, yKey, aggregation }) {
           .style("top", `${event.offsetY - 35}px`);
       })
       .on("mouseout", function () {
-        d3.select(this).attr("fill", "#3b82f6");
+        d3.select(this).attr("fill", lineColor);
         tooltip.style("opacity", 0);
       });
 
@@ -156,7 +154,7 @@ export default function LineChart({ data, xKey, yKey, aggregation }) {
       .style('fill', '#374151')
       .style('font-size', '12px')
       .text(xKey);
-  }, [data, xKey, yKey, aggregation]);
+  }, [data, xKey, yKey, aggregation, lineColor]);
 
   return (
     <div className="relative">
@@ -178,4 +176,5 @@ export default function LineChart({ data, xKey, yKey, aggregation }) {
   - xKey: nombre de la columna para el eje X.
   - yKey: nombre de la columna para el eje Y.
   - aggregation: método de agregación ('sum' o 'mean') aplicado a los valores Y.
+  - lineColor: color de la línea y los puntos (por defecto '#3b82f6').
 */
