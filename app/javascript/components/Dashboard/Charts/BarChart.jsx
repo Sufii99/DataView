@@ -40,7 +40,15 @@ export default function BarChart({ data, xKey, yKey, aggregation }) {
           ? d3.mean(values, v => +v[yKey])
           : d3.sum(values, v => +v[yKey])
       })
-    );
+    ).sort((a, b) => {
+      const valA = a[xKey];
+      const valB = b[xKey];
+    
+      if (typeof valA === "string" && typeof valB === "string") {
+        return valA.localeCompare(valB);
+      }
+      return valA > valB ? 1 : valA < valB ? -1 : 0;
+    });    
 
     /* Tooltip personalizado */
     const tooltip = d3.select(wrapper)

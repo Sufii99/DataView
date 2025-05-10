@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react"
-import * as d3 from "d3"
 import FlashNotification from "../shared/FlashNotification"
 import ConfirmModal from "../shared/ConfirmModal"
+import RoleDistributionChart from "./RoleDistributionChart"
+import WorldMapChart from "./WorldMapChart"
 
 export default function AdminPanel() {
   const [users, setUsers] = useState([])
@@ -10,9 +11,11 @@ export default function AdminPanel() {
   const [flash, setFlash] = useState({ message: null, type: "notice" })
   const [modalOpen, setModalOpen] = useState(false)
   const [userToDelete, setUserToDelete] = useState(null)
+  const [countryStats, setCountryStats] = useState({})
 
   useEffect(() => {
     fetchUsers()
+    fetchCountryStats()
   }, [])
 
   const fetchUsers = async () => {
@@ -20,8 +23,13 @@ export default function AdminPanel() {
     const res = await fetch("/api/admin/users")
     const data = await res.json()
     setUsers(data)
-    renderDonutChart(data)
     setLoading(false)
+  }
+
+  const fetchCountryStats = async () => {
+    const res = await fetch("/api/admin/users/countries_distribution")
+    const data = await res.json()
+    setCountryStats(data)
   }
 
   const handleDelete = async (id) => {
@@ -74,48 +82,52 @@ export default function AdminPanel() {
             {loading ? (
               <p className="text-gray-500 text-sm">Cargando usuarios...</p>
             ) : (
-              <table className="w-full text-left border-collapse">
-                <thead>
-                  <tr className="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
-                    <th className="py-3 px-4">Email</th>
-                    <th className="py-3 px-4 text-center">Rol</th>
-                    <th className="py-3 px-4 text-center">Acciones</th>
-                  </tr>
-                </thead>
-                <tbody className="text-gray-700 text-sm divide-y divide-gray-200">
-                  {filteredUsers.map((user) => (
-                    <tr key={user.id} className="hover:bg-gray-50">
-                      <td className="py-3 px-4">{user.email}</td>
-                      <td className="py-3 px-4 text-center">
-                        {user.admin ? (
-                          <span className="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full">Admin</span>
-                        ) : (
-                          <span className="bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded-full">Usuario</span>
-                        )}
-                      </td>
-                      <td className="py-3 px-4 text-center">
-                        <button
-                          onClick={() => {
-                            setUserToDelete(user.id)
-                            setModalOpen(true)
-                          }}
-                          className="text-sm bg-red-100 text-red-700 hover:bg-red-200 px-3 py-1 rounded-md transition"
-                        >
-                          Eliminar
-                        </button>
-                      </td>
+              <div className="overflow-x-auto">
+                <table className="min-w-full text-left border-collapse">
+                  <thead>
+                    <tr className="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                      <th className="py-3 px-4">Nombre</th>
+                      <th className="py-3 px-4">Email</th>
+                      <th className="py-3 px-4 text-center">Rol</th>
+                      <th className="py-3 px-4 text-center">Acciones</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody className="text-gray-700 text-sm divide-y divide-gray-200">
+                    {filteredUsers.map((user) => (
+                      <tr key={user.id} className="hover:bg-gray-50">
+                        <td className="py-3 px-4">{user.first_name} {user.last_name}</td>
+                        <td className="py-3 px-4">{user.email}</td>
+                        <td className="py-3 px-4 text-center">
+                          {user.admin ? (
+                            <span className="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full">Admin</span>
+                          ) : (
+                            <span className="bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded-full">Usuario</span>
+                          )}
+                        </td>
+                        <td className="py-3 px-4 text-center">
+                          <button
+                            onClick={() => {
+                              setUserToDelete(user.id)
+                              setModalOpen(true)
+                            }}
+                            className="text-sm bg-red-100 text-red-700 hover:bg-red-200 px-3 py-1 rounded-md transition cursor-pointer"
+                          >
+                            Eliminar
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             )}
           </div>
 
-          {/* Card: Visualización con D3 */}
-          <div className="bg-white shadow-md rounded-2xl p-4 w-full max-w-sm">
-            <h2 className="text-base text-center font-semibold text-gray-800 mb-3">Distribución de roles</h2>
-            <div id="admin-role-chart" className="w-full h-56 flex justify-center items-center"></div>
-          </div>
+          {/* Gráfica de Roles de usuario */}
+          <RoleDistributionChart users={users} />
+
+          {/* Gráfica de Distribución de usuarios por país */}
+          <WorldMapChart countryData={countryStats} />
         </div>
       </div>
 
@@ -139,50 +151,4 @@ export default function AdminPanel() {
 
 function getCsrfToken() {
   return document.querySelector('meta[name="csrf-token"]').content
-}
-
-function renderDonutChart(users) {
-  const data = [
-    { label: "Admins", value: users.filter(u => u.admin).length },
-    { label: "Usuarios", value: users.filter(u => !u.admin).length },
-  ]
-
-  const width = 250
-  const height = 220
-  const radius = Math.min(width, height) / 2
-
-  d3.select("#admin-role-chart").selectAll("*").remove()
-
-  const svg = d3.select("#admin-role-chart")
-    .append("svg")
-    .attr("width", width)
-    .attr("height", height)
-    .append("g")
-    .attr("transform", `translate(${width / 2}, ${height / 2})`)
-
-  const color = d3.scaleOrdinal()
-    .domain(data.map(d => d.label))
-    .range(["#34D399", "#3B82F6"])
-
-  const pie = d3.pie().value(d => d.value)
-  const arc = d3.arc().innerRadius(50).outerRadius(radius)
-
-  svg.selectAll("path")
-    .data(pie(data))
-    .enter()
-    .append("path")
-    .attr("d", arc)
-    .attr("fill", d => color(d.data.label))
-    .attr("stroke", "white")
-    .style("stroke-width", "2px")
-
-  svg.selectAll("text")
-    .data(pie(data))
-    .enter()
-    .append("text")
-    .text(d => `${d.data.label}: ${d.data.value}`)
-    .attr("transform", d => `translate(${arc.centroid(d)})`)
-    .style("text-anchor", "middle")
-    .style("font-size", "0.65rem")
-    .style("fill", "#111827")
 }

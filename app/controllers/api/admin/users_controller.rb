@@ -5,7 +5,7 @@ module Api
       before_action :require_admin
 
       def index
-        users = User.select(:id, :email, :admin)
+        users = User.select(:id, :email, :first_name, :last_name, :admin)
         render json: users
       end
 
@@ -17,6 +17,11 @@ module Api
           user.destroy
           render json: { message: "Usuario eliminado" }, status: :ok
         end
+      end
+
+      def countries_distribution
+        data = User.where.not(country: [ nil, "" ]).group(:country).count
+        render json: data
       end
 
       private

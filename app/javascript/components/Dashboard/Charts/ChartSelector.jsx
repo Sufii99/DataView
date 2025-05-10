@@ -3,19 +3,22 @@ import React, { useState, useEffect } from 'react';
 import BarChart from './BarChart';
 import LineChart from './LineChart';
 import PieChart from './PieChart';
+import StackedBarChart from './StackedBarChart';
 
 export default function ChartSelector({ data, columns }) {
   const [chartType, setChartType] = useState('bar');                // Tipo de gráfico seleccionado
   const [xColumn, setXColumn] = useState(columns[0]);               // Columna del eje X o categoría
   const [yColumn, setYColumn] = useState(columns[1] || columns[0]); // Columna del eje Y o valores
+  const [stackColumn, setStackColumn] = useState(columns[2] || columns[0]); // Columna secundaria para barras apiladas
   const [aggregation, setAggregation] = useState('sum');            // Método de agregación aplicado a Y
 
-  /* Reseteamos los selectores de las columnas (evitar bug) */
+  /* Reseteamos los selectores al cambiar columnas */
   useEffect(() => {
     if (!columns || columns.length === 0) return;
     setXColumn(columns[0]);
     setYColumn(columns[1] || columns[0]);
-  }, [columns]);  
+    setStackColumn(columns[2] || columns[0]);
+  }, [columns]);
 
   return (
     <div className="space-y-6">
@@ -30,38 +33,12 @@ export default function ChartSelector({ data, columns }) {
             <option value="bar">Gráfico de Barras</option>
             <option value="line">Gráfico de Líneas</option>
             <option value="pie">Gráfico de Pastel</option>
+            <option value="stacked">Barras Apiladas</option>
           </select>
         </div>
 
-        {/* Mostrar columnas a elegir según el tipo de gráfico */}
-        {chartType !== 'pie' ? (
-          <>
-            <div>
-              <label className="block mb-2 font-semibold">Eje X</label>
-              <select
-                value={xColumn}
-                onChange={(e) => setXColumn(e.target.value)}
-                className="w-full border rounded px-4 py-2"
-              >
-                {columns.map((col, idx) => (
-                  <option key={idx} value={col}>{col}</option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label className="block mb-2 font-semibold">Eje Y</label>
-              <select
-                value={yColumn}
-                onChange={(e) => setYColumn(e.target.value)}
-                className="w-full border rounded px-4 py-2"
-              >
-                {columns.map((col, idx) => (
-                  <option key={idx} value={col}>{col}</option>
-                ))}
-              </select>
-            </div>
-          </>
-        ) : (
+        {/* Selectores de columnas */}
+        {chartType === 'pie' ? (
           <>
             <div>
               <label className="block mb-2 font-semibold">Categoría (etiqueta)</label>
@@ -88,9 +65,50 @@ export default function ChartSelector({ data, columns }) {
               </select>
             </div>
           </>
+        ) : (
+          <>
+            <div>
+              <label className="block mb-2 font-semibold">Eje X</label>
+              <select
+                value={xColumn}
+                onChange={(e) => setXColumn(e.target.value)}
+                className="w-full border rounded px-4 py-2"
+              >
+                {columns.map((col, idx) => (
+                  <option key={idx} value={col}>{col}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="block mb-2 font-semibold">Eje Y</label>
+              <select
+                value={yColumn}
+                onChange={(e) => setYColumn(e.target.value)}
+                className="w-full border rounded px-4 py-2"
+              >
+                {columns.map((col, idx) => (
+                  <option key={idx} value={col}>{col}</option>
+                ))}
+              </select>
+            </div>
+            {chartType === 'stacked' && (
+              <div>
+                <label className="block mb-2 font-semibold">Subcategoría (stack)</label>
+                <select
+                  value={stackColumn}
+                  onChange={(e) => setStackColumn(e.target.value)}
+                  className="w-full border rounded px-4 py-2"
+                >
+                  {columns.map((col, idx) => (
+                    <option key={idx} value={col}>{col}</option>
+                  ))}
+                </select>
+              </div>
+            )}
+          </>
         )}
 
-        {/* El select de agregación aparece SIEMPRE */}
+        {/* Selector de agregación */}
         <div>
           <label className="block mb-2 font-semibold">Tipo de Agregación</label>
           <select
@@ -104,7 +122,7 @@ export default function ChartSelector({ data, columns }) {
         </div>
       </div>
 
-      {/* Mostrar la gráfica */}
+      {/* Gráfico renderizado */}
       {chartType === 'bar' && (
         <BarChart data={data} xKey={xColumn} yKey={yColumn} aggregation={aggregation} />
       )}
@@ -113,6 +131,9 @@ export default function ChartSelector({ data, columns }) {
       )}
       {chartType === 'pie' && (
         <PieChart data={data} categoryKey={xColumn} valueKey={yColumn} aggregation={aggregation} />
+      )}
+      {chartType === 'stacked' && (
+        <StackedBarChart data={data} xKey={xColumn} yKey={yColumn} stackKey={stackColumn} aggregation={aggregation} />
       )}
     </div>
   );

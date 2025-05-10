@@ -22,7 +22,11 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :admin do
-      resources :users, only: [ :index, :destroy ]
+      resources :users, only: [ :index, :destroy ] do
+        collection do
+          get :countries_distribution
+        end
+      end
     end
   end
 
