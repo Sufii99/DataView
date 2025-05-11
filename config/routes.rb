@@ -32,4 +32,6 @@ Rails.application.routes.draw do
   end
 
   get "admin/panel", to: "admin#panel", as: :admin_panel
+
+  post "cookies/accept", to: "cookies#accept", as: :cookies_accept
 end

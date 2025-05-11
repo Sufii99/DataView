@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import BarChart from "./BarChart";
 import LineChart from "./LineChart";
 import PieChart from "./PieChart";
+import StackedBarChart from "./StackedBarChart";
 
 const ChartDemo = () => {
   const [selectedChart, setSelectedChart] = useState("bar");
@@ -14,6 +15,8 @@ const ChartDemo = () => {
         return <LineChart />;
       case "pie":
         return <PieChart />;
+      case "stacked":
+        return <StackedBarChart />;
       default:
         return <BarChart />;
     }
@@ -22,7 +25,10 @@ const ChartDemo = () => {
   return (
     <div className="max-w-5xl mx-auto p-6">
       <div className="mb-6">
-        <label htmlFor="chart-select" className="block mb-2 text-lg font-semibold text-gray-700">
+        <label
+          htmlFor="chart-select"
+          className="block mb-2 text-lg font-semibold text-gray-700"
+        >
           Selecciona el tipo de gráfico:
         </label>
         <select
@@ -34,6 +40,7 @@ const ChartDemo = () => {
           <option value="bar">Gráfico de Barras</option>
           <option value="line">Gráfico de Líneas</option>
           <option value="pie">Gráfico de Tarta</option>
+          <option value="stacked">Gráfico de Barras Apiladas</option>
         </select>
       </div>
 

@@ -8,6 +8,7 @@ import './views/header/header_transition.js';
 import './views/header/help_drop.js';
 import './views/header/help_mobile.js';
 import './views/notifications/notification_slide.js';
+import "./views/cookies/cookies.js";
 
 /* Componentes jsx */
 import ChartDemo from './components/Home/ChartDemo.jsx';
