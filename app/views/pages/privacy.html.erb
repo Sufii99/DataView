@@ -1,2 +1,63 @@
-<h1>Pages#privacy</h1>
-<p>Find me in app/views/pages/privacy.html.erb</p>
+<main class="max-w-4xl mx-auto px-4 py-30 text-zinc-800">
+  <h1 class="text-4xl font-bold mb-4">Política de Privacidad</h1>
+
+  <p class="mb-4 text-sm">
+    En <strong>DataView</strong>, valoramos tu privacidad. Esta política describe cómo tratamos tus datos personales
+    cuando utilizas nuestra plataforma.
+  </p>
+
+  <section class="mb-8">
+    <h2 class="text-xl font-semibold mb-2">1. Información que recopilamos</h2>
+    <ul class="list-disc list-inside text-sm space-y-1">
+      <li>Información proporcionada al registrarte: nombre, correo electrónico, etc.</li>
+      <li>Archivos subidos por ti a la plataforma.</li>
+      <li>Información técnica como tu dirección IP o tipo de navegador.</li>
+    </ul>
+  </section>
+
+  <section class="mb-8">
+    <h2 class="text-xl font-semibold mb-2">2. Uso de cookies</h2>
+    <p class="text-sm">
+      Utilizamos cookies para mejorar tu experiencia, mantener tu sesión iniciada y personalizar el contenido.
+      Puedes aceptar o rechazar su uso mediante nuestro banner de consentimiento.
+    </p>
+  </section>
+
+  <section class="mb-8">
+    <h2 class="text-xl font-semibold mb-2">3. Finalidad del tratamiento</h2>
+    <p class="text-sm">
+      Los datos recopilados se utilizan exclusivamente para permitir el funcionamiento de la plataforma,
+      mejorar los servicios ofrecidos y garantizar la seguridad del sistema.
+    </p>
+  </section>
+
+  <section class="mb-8">
+    <h2 class="text-xl font-semibold mb-2">4. Terceros</h2>
+    <p class="text-sm">
+      No compartimos tus datos personales con terceros sin tu consentimiento, salvo obligación legal o necesidades
+      técnicas esenciales para el funcionamiento de la plataforma.
+    </p>
+  </section>
+
+  <section class="mb-8">
+    <h2 class="text-xl font-semibold mb-2">5. Tus derechos</h2>
+    <ul class="list-disc list-inside text-sm space-y-1">
+      <li>Acceder, rectificar o eliminar tus datos personales.</li>
+      <li>Oponerte al tratamiento o solicitar la limitación del mismo.</li>
+      <li>Portar tus datos en un formato accesible.</li>
+    </ul>
+  </section>
+
+  <section class="mb-8">
+    <h2 class="text-xl font-semibold mb-2">6. Contacto</h2>
+    <p class="text-sm">
+      Para cualquier consulta relacionada con tu privacidad, puedes escribirnos a:
+      <a href="mailto:dataviewtest@gmail.com" class="underline hover:text-[#ddad81]">dataviewtest@gmail.com</a>
+    </p>
+  </section>
+
+  <div class="mt-12">
+    <%= link_to "Volver a la página principal", root_path,
+        class: "inline-block text-sm font-semibold text-[#634647] hover:underline" %>
+  </div>
+</main>
