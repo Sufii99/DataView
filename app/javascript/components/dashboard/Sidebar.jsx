@@ -82,17 +82,20 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen, activeSection, se
             </div>
           </div>
 
-          {/* Configuración */}
+          {/* Información */}
           <button
-            className={`flex items-center gap-2 w-full text-left mt-6 cursor-pointer ${activeSection === 'settings' ? 'text-indigo-600 font-bold' : 'text-gray-700 hover:text-indigo-600'}`}
+            className={`flex items-center gap-2 w-full text-left cursor-pointer ${
+              activeSection === 'info' ? 'text-indigo-600 font-bold' : 'text-gray-700 hover:text-indigo-600'
+            }`}
             onClick={() => {
-              setActiveSection('settings');
+              setActiveSection('info');
+              setSelectedFileId(null); // por si acaso quieres limpiar selección
               setSidebarOpen(false);
             }}
           >
-            {/* Cambio de icono Configuracion */}
-            Configuración
+            Información
           </button>
+
         </div>
       </div>
 

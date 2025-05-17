@@ -4,6 +4,7 @@ import BarChart from './BarChart';
 import LineChart from './LineChart';
 import PieChart from './PieChart';
 import StackedBarChart from './StackedBarChart';
+import ChartStatistics from './ChartStatistics';
 
 export default function ChartSelector({ data, columns }) {
   const [chartType, setChartType] = useState('bar');
@@ -139,41 +140,61 @@ export default function ChartSelector({ data, columns }) {
       </div>
 
       {/* Renderizado del gráfico */}
-      {chartType === 'bar' && (
-        <BarChart
-          data={data}
-          xKey={xColumn}
-          yKey={yColumn}
-          aggregation={aggregation}
-          barColor={color}
-        />
-      )}
-      {chartType === 'line' && (
-        <LineChart
-          data={data}
-          xKey={xColumn}
-          yKey={yColumn}
-          aggregation={aggregation}
-          lineColor={color}
-        />
-      )}
-      {chartType === 'pie' && (
-        <PieChart
-          data={data}
-          categoryKey={xColumn}
-          valueKey={yColumn}
-          aggregation={aggregation}
-        />
-      )}
-      {chartType === 'stacked' && (
-        <StackedBarChart
-          data={data}
-          xKey={xColumn}
-          yKey={yColumn}
-          stackKey={stackColumn}
-          aggregation={aggregation}
-        />
-      )}
+      {(() => {
+        let chart = null;
+
+        if (chartType === 'bar') {
+          chart = (
+            <BarChart
+              data={data}
+              xKey={xColumn}
+              yKey={yColumn}
+              aggregation={aggregation}
+              barColor={color}
+            />
+          );
+        } else if (chartType === 'line') {
+          chart = (
+            <LineChart
+              data={data}
+              xKey={xColumn}
+              yKey={yColumn}
+              aggregation={aggregation}
+              lineColor={color}
+            />
+          );
+        } else if (chartType === 'pie') {
+          chart = (
+            <PieChart
+              data={data}
+              categoryKey={xColumn}
+              valueKey={yColumn}
+              aggregation={aggregation}
+            />
+          );
+        } else if (chartType === 'stacked') {
+          chart = (
+            <StackedBarChart
+              data={data}
+              xKey={xColumn}
+              yKey={yColumn}
+              stackKey={stackColumn}
+              aggregation={aggregation}
+            />
+          );
+        }
+
+        // Valores numéricos actuales para estadísticas
+        const yValues = data.map(d => Number(d[yColumn])).filter(v => !isNaN(v));
+
+        return (
+          <>
+            {chart}
+            <ChartStatistics data={yValues} />
+          </>
+        );
+      })()}
+
     </div>
   );
 }

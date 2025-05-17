@@ -3,17 +3,17 @@ import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 
 /* JS de vistas */
-import './views/header/mobile_menu.js';
-import './views/header/header_transition.js';
-import './views/header/help_drop.js';
-import './views/header/help_mobile.js';
-import './views/notifications/notification_slide.js';
-import "./views/cookies/cookies.js";
+import './viewScripts/header/mobile_menu.js';
+import './viewScripts/header/header_transition.js';
+import './viewScripts/header/help_drop.js';
+import './viewScripts/header/help_mobile.js';
+import './viewScripts/notifications/notification_slide.js';
+import "./viewScripts/cookies/cookies.js";
 
 /* Componentes jsx */
-import ChartDemo from './components/Home/ChartDemo.jsx';
-import DashboardApp from './components/Dashboard/DashboardApp.jsx';
-import AdminPanel from './components/Administration/AdminPanel.jsx';
+import ChartDemo from './components/home/ChartDemo.jsx';
+import DashboardApp from './components/dashboard/DashboardApp.jsx';
+import AdminPanel from './components/administration/AdminPanel.jsx';
 
 document.addEventListener("turbo:load", () => {
   const chartDemoRoot = document.getElementById("chart-demo-root");

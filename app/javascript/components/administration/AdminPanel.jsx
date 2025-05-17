@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react"
 import FlashNotification from "../shared/FlashNotification"
 import ConfirmModal from "../shared/ConfirmModal"
-import RoleDistributionChart from "./RoleDistributionChart"
-import WorldMapChart from "./WorldMapChart"
-import UserRegistrationChart from "./UserRegistrationChart"
+import RoleDistributionChart from "./Charts/RoleDistributionChart"
+import WorldMapChart from "./Charts/WorldMapChart"
+import UserRegistrationChart from "./Charts/UserRegistrationChart"
 
 export default function AdminPanel() {
   const [users, setUsers] = useState([])

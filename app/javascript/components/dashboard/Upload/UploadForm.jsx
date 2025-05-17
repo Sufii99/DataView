@@ -1,7 +1,7 @@
 /* Formulario para subir los archivos. Muestra una previsualización antes de enviarlo (con FilePreviewModal) */
 import React, { useState } from 'react';
 import FilePreviewModal from './FilePreviewModal';
-import FlashNotification from "../shared/FlashNotification";
+import FlashNotification from "../../shared/FlashNotification";
 
 export default function UploadForm({ setUploadedFiles }) {
   const [fileToPreview, setFileToPreview] = useState(null); // Archivo seleccionado por input o drag & drop

@@ -1,7 +1,8 @@
 /* Componente que muestra el contenido central según la sección elegida: subida, visualización de archivo o configuración */
 import React from 'react';
-import UploadForm from './UploadForm';
-import FileVisualizer from './FileVisualizer'; 
+import UploadForm from './Upload/UploadForm';
+import FileVisualizer from './Files/FileVisualizer'; 
+import InfoPanel from './Info/InfoPanel';
 
 export default function MainContent({ activeSection, selectedFileId, setUploadedFiles, uploadedFiles }) {
   const selectedFile = uploadedFiles[selectedFileId] || null;
@@ -27,12 +28,12 @@ export default function MainContent({ activeSection, selectedFileId, setUploaded
         </div>
       )}
 
-      {/* Configuración */}
-      {activeSection === 'settings' && (
-        <div>
-          <h1 className="text-3xl font-bold mb-6">Configuración</h1>
-          <p className="text-gray-700">Ajustes y configuraciones del usuario o de la plataforma.</p>
-        </div>
+      {/* Información */}
+      {activeSection === 'info' && (
+        <main className="flex-1 p-6 overflow-y-auto">
+          <InfoPanel />
+        </main>
+
       )}
       
     </main>

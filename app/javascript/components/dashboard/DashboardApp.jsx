@@ -5,7 +5,7 @@ import MainContent from './MainContent';
 
 export default function DashboardApp() {
     const [sidebarOpen, setSidebarOpen] = useState(false);        // Indica si el sidebar está abierto (modo móvil)
-    const [activeSection, setActiveSection] = useState('upload'); // Sección activa del panel ('upload', 'file', 'settings')
+    const [activeSection, setActiveSection] = useState('upload'); // Sección activa del panel ('upload', 'file', 'info')
     const [selectedFileId, setSelectedFileId] = useState(null);   // Índice del archivo actualmente seleccionado
     const [uploadedFiles, setUploadedFiles] = useState([]);       // Lista de archivos subidos al servidor  
 
