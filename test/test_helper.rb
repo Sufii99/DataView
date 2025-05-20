@@ -1,6 +1,8 @@
 ENV["RAILS_ENV"] ||= "test"
+require "devise"
 require_relative "../config/environment"
 require "rails/test_help"
+Rails.application.eager_load!
 
 module ActiveSupport
   class TestCase

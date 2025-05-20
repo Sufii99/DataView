@@ -8,6 +8,8 @@ class FileUpload < ApplicationRecord
   private
 
   def data_file_attached
-    errors.add(:data_file, "must be attached") unless data_file.attached?
+    unless data_file.attached?
+      errors.add(:data_file, :blank)
+    end
   end
 end

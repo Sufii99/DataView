@@ -1,8 +1,6 @@
 ![Logo](public/logo.png)
 
 
-# DataView
-
 DataView es una plataforma web orientada a la visualización, análisis y gestión de datos, pensada para ofrecer una experiencia de usuario intuitiva y eficiente. Su diseño combina simplicidad y potencia, permitiendo a los usuarios acceder, interpretar y administrar información de manera ágil, sin requerir conocimientos técnicos avanzados.
 
 

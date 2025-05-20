@@ -24,20 +24,22 @@ class FileUploadsController < ApplicationController
         @file_upload.original_filename = @file_upload.data_file.filename.to_s
         @file_upload.size_in_bytes = @file_upload.data_file.byte_size
         @file_upload.file_type = detect_file_type(@file_upload.data_file)
-
-        # Calcular filas y columnas
-        rows, columns = count_rows_and_columns(@file_upload.data_file, @file_upload.file_type)
-        @file_upload.rows_count = rows
-        @file_upload.columns_count = columns
       end
     end
 
     if @file_upload.save
+      # ✅ Solo después de guardar, se puede analizar el archivo
+      if @file_upload.data_file.attached?
+        rows, columns = count_rows_and_columns(@file_upload.data_file, @file_upload.file_type)
+        @file_upload.update(rows_count: rows, columns_count: columns)
+      end
+
       render json: file_data(@file_upload), status: :created
     else
       render json: { errors: @file_upload.errors.full_messages }, status: :unprocessable_entity
     end
   end
+
 
   # DELETE /file_uploads/:id
   def destroy
@@ -81,24 +83,28 @@ class FileUploadsController < ApplicationController
   end
 
   def count_rows_and_columns(attached_file, file_type)
-    file_path = ActiveStorage::Blob.service.send(:path_for, attached_file.blob.key)
-
     case file_type
     when "csv"
       rows = 0
       max_cols = 0
-      CSV.foreach(file_path, headers: true) do |row|
+      csv_data = attached_file.download
+      CSV.parse(csv_data, headers: true) do |row|
         rows += 1
         max_cols = [ max_cols, row.fields.count ].max
       end
       [ rows, max_cols ]
 
     when "xlsx"
-      spreadsheet = Roo::Spreadsheet.open(file_path, extension: :xlsx)
-      sheet = spreadsheet.sheet(0)
-      rows = sheet.last_row.to_i - sheet.first_row.to_i + 1
-      columns = sheet.last_column.to_i
-      [ rows, columns ]
+      xlsx_data = attached_file.download
+      Tempfile.create([ "upload", ".xlsx" ]) do |tempfile|
+        tempfile.write(xlsx_data)
+        tempfile.rewind
+        spreadsheet = Roo::Spreadsheet.open(tempfile.path, extension: :xlsx)
+        sheet = spreadsheet.sheet(0)
+        rows = sheet.last_row.to_i - sheet.first_row.to_i + 1
+        columns = sheet.last_column.to_i
+        return [ rows, columns ]
+      end
 
     else
       [ 0, 0 ]

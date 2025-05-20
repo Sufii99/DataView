@@ -1,0 +1,31 @@
+es:
+  activerecord:
+    models:
+      file_upload: "Archivo"
+    attributes:
+      file_upload:
+        name: "Nombre"
+        data_file: "Archivo"
+    errors:
+      models:
+        file_upload:
+          attributes:
+            name:
+              blank: "no puede estar en blanco"
+            data_file:
+              blank: "debe estar adjunto"
+        user:
+          attributes:
+            first_name:
+              blank: "no puede estar en blanco"
+            last_name:
+              blank: "no puede estar en blanco"
+            email:
+              blank: "no puede estar en blanco"
+              invalid: "no es válido"
+            password:
+              blank: "no puede estar en blanco"
+              too_short: "es demasiado corto (mínimo 6 caracteres)"
+            password_confirmation:
+              blank: "no puede estar en blanco"
+              confirmation: "no coincide con la contraseña"
