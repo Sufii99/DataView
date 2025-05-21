@@ -33,7 +33,7 @@ class ContactControllerTest < ActionDispatch::IntegrationTest
   # Comprueba que el formulario se envía correctamente con todos los campos obligatorios
   test "sends contact form with required fields" do
     assert_emails 1 do
-      post "/contacto", params: {
+      post contact_path, params: {
         'first-name': "Juan",
         'last-name': "",
         email: "juan@example.com",
@@ -49,7 +49,7 @@ class ContactControllerTest < ActionDispatch::IntegrationTest
   # Comprueba que NO se envía si falta el nombre
   test "does not send if name is missing" do
     assert_emails 0 do
-      post "/contacto", params: {
+      post contact_path, params: {
         'first-name': "",
         'last-name': "",
         email: "juan@example.com",
@@ -65,7 +65,7 @@ class ContactControllerTest < ActionDispatch::IntegrationTest
   # Comprueba que NO se envía si falta el email
   test "does not send if email is missing" do
     assert_emails 0 do
-      post "/contacto", params: {
+      post contact_path, params: {
         'first-name': "Juan",
         'last-name': "",
         email: "",
@@ -81,7 +81,7 @@ class ContactControllerTest < ActionDispatch::IntegrationTest
   # Comprueba que NO se envía si falta el mensaje
   test "does not send if message is missing" do
     assert_emails 0 do
-      post "/contacto", params: {
+      post contact_path, params: {
         'first-name': "Juan",
         'last-name': "",
         email: "juan@example.com",

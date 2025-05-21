@@ -68,3 +68,7 @@ gem "devise"
 
 gem "roo"
 gem "csv", require: false
+
+group :test do
+  gem "simplecov", require: false
+end

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   # Ruta de "Contacto" y envío del formulario
   get "/contact", to: "contact#contact_form"
-  post "/contacto", to: "contact#send_email"
+  post "/contact", to: "contact#send_email"
 
   # Rutas de páginas estáticas ("Guía", "FAQ", "Términos y Condiciones", "Política de privacidad")
   get "/guide", to: "pages#guide"
@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get "/terms", to: "pages#terms"
   get "/privacy", to: "pages#privacy"
 
+  # Uso de devise para autenticación de usuarios
   devise_for :users
 
   # Ruta de "Dashboard" (solo usuarios autenticados)
@@ -39,5 +40,6 @@ Rails.application.routes.draw do
     end
   end
 
+  # Ruta de gestión de cookies
   post "cookies/accept", to: "cookies#accept", as: :cookies_accept
 end
