@@ -1,111 +1,109 @@
 <% content_for :title, "DataView | Configuración de perfil" %>
 
-<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 pt-30">
-  
-  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-    <h2 class="mt-10 text-center text-2xl font-bold tracking-tight text-gray-900">
+<div class="flex min-h-screen flex-col justify-center items-center px-6 py-20 pt-35">
+  <div class="w-full max-w-md bg-white rounded-2xl shadow-lg border border-gray-200 p-8">
+    <h2 class="text-center text-2xl font-bold tracking-tight text-gray-900">
       Edita tu perfil
     </h2>
-  </div>
 
-  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |f| %>
-      <div class="space-y-6">
-        <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="mt-8">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |f| %>
+        <div class="space-y-6">
+          <%= render "devise/shared/error_messages", resource: resource %>
 
-        <div>
-          <%= f.label :first_name, "Nombre", class: "block text-sm font-medium text-gray-900" %>
-          <div class="mt-2">
-            <%= f.text_field :first_name, required: true, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 outline-gray-300 focus:outline-2 focus:outline-indigo-600 sm:text-sm" %>
-          </div>
-        </div>
-
-        <div>
-          <%= f.label :last_name, "Apellidos", class: "block text-sm font-medium text-gray-900" %>
-          <div class="mt-2">
-            <%= f.text_field :last_name, required: true, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 outline-gray-300 focus:outline-2 focus:outline-indigo-600 sm:text-sm" %>
-          </div>
-        </div>
-
-        <div>
-          <%= f.label :country, "País", class: "block text-sm font-medium text-gray-900" %>
-          <div class="mt-2">
-            <%= f.select :country, [
-              "España", "Argentina", "México", "Colombia", "Chile", "Perú", "Venezuela", "Uruguay",
-              "Estados Unidos", "Francia", "Alemania", "Italia", "Reino Unido", "Portugal"
-            ], { prompt: "Selecciona tu país" },
-              class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 outline-gray-300 focus:outline-2 focus:outline-indigo-600 sm:text-sm" %>
-          </div>
-        </div>
-
-        <div>
-          <%= f.label :email, class: "block text-sm font-medium text-gray-900" %>
-          <div class="mt-2">
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true,
-              class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 outline-gray-300 focus:outline-2 focus:outline-indigo-600 sm:text-sm" %>
-          </div>
-        </div>
-
-        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-          <p class="text-sm text-gray-500">Esperando confirmación para: <%= resource.unconfirmed_email %></p>
-        <% end %>
-
-        <div>
-          <%= f.label :avatar, "Foto de perfil", class: "block text-sm font-medium text-gray-900" %>
-          <% if resource.avatar.attached? %>
+          <div>
+            <%= f.label :first_name, "Nombre", class: "block text-sm font-medium text-gray-900" %>
             <div class="mt-2">
-              <%= image_tag resource.avatar.variant(resize_to_limit: [100, 100]), class: "rounded-full w-24 h-24 object-cover mx-auto" %>
+              <%= f.text_field :first_name, required: true, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 outline-gray-300 focus:outline-2 focus:outline-indigo-600 sm:text-sm" %>
             </div>
+          </div>
+
+          <div>
+            <%= f.label :last_name, "Apellidos", class: "block text-sm font-medium text-gray-900" %>
+            <div class="mt-2">
+              <%= f.text_field :last_name, required: true, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 outline-gray-300 focus:outline-2 focus:outline-indigo-600 sm:text-sm" %>
+            </div>
+          </div>
+
+          <div>
+            <%= f.label :country, "País", class: "block text-sm font-medium text-gray-900" %>
+            <div class="mt-2">
+              <%= f.select :country, [
+                "España", "Argentina", "México", "Colombia", "Chile", "Perú", "Venezuela", "Uruguay",
+                "Estados Unidos", "Francia", "Alemania", "Italia", "Reino Unido", "Portugal"
+              ], { prompt: "Selecciona tu país" },
+                class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 outline-gray-300 focus:outline-2 focus:outline-indigo-600 sm:text-sm" %>
+            </div>
+          </div>
+
+          <div>
+            <%= f.label :email, class: "block text-sm font-medium text-gray-900" %>
+            <div class="mt-2">
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true,
+                class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 outline-gray-300 focus:outline-2 focus:outline-indigo-600 sm:text-sm" %>
+            </div>
+          </div>
+
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <p class="text-sm text-gray-500">Esperando confirmación para: <%= resource.unconfirmed_email %></p>
           <% end %>
-          <div class="mt-2">
-            <%= f.file_field :avatar, class: "block w-full text-sm text-gray-500 file:mr-4 file:rounded-md file:border-0 file:bg-indigo-600 file:px-3 file:py-1.5 file:text-sm file:font-semibold file:text-white hover:file:bg-indigo-500" %>
+
+          <div>
+            <%= f.label :avatar, "Foto de perfil", class: "block text-sm font-medium text-gray-900" %>
+            <% if resource.avatar.attached? %>
+              <div class="mt-2 flex justify-center">
+                <%= image_tag resource.avatar.variant(resize_to_limit: [100, 100]), class: "rounded-full w-24 h-24 object-cover" %>
+              </div>
+            <% end %>
+            <div class="mt-2">
+              <%= f.file_field :avatar, class: "block w-full text-sm text-gray-500 file:mr-4 file:rounded-md file:border-0 file:bg-indigo-600 file:px-3 file:py-1.5 file:text-sm file:font-semibold file:text-white hover:file:bg-indigo-500" %>
+            </div>
+          </div>
+
+          <div>
+            <%= f.label :password, "Nueva contraseña", class: "block text-sm font-medium text-gray-900" %>
+            <span class="text-sm text-gray-500">(déjalo en blanco si no quieres cambiarlo)</span>
+            <div class="mt-2">
+              <%= f.password_field :password, autocomplete: "new-password",
+                class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 outline-gray-300 focus:outline-2 focus:outline-indigo-600 sm:text-sm" %>
+            </div>
+            <% if @minimum_password_length %>
+              <em class="text-sm text-gray-500"><%= @minimum_password_length %> caracteres mínimo</em>
+            <% end %>
+          </div>
+
+          <div>
+            <%= f.label :password_confirmation, "Confirma la nueva contraseña", class: "block text-sm font-medium text-gray-900" %>
+            <div class="mt-2">
+              <%= f.password_field :password_confirmation, autocomplete: "new-password",
+                class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 outline-gray-300 focus:outline-2 focus:outline-indigo-600 sm:text-sm" %>
+            </div>
+          </div>
+
+          <div>
+            <%= f.label :current_password, "Contraseña actual", class: "block text-sm font-medium text-gray-900" %>
+            <span class="text-sm text-gray-500">(necesario para confirmar los cambios)</span>
+            <div class="mt-2">
+              <%= f.password_field :current_password, autocomplete: "current-password", required: true,
+                class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 outline-gray-300 focus:outline-2 focus:outline-indigo-600 sm:text-sm" %>
+            </div>
+          </div>
+
+          <div>
+            <%= f.submit "Actualizar", class: "flex w-full justify-center rounded-xl bg-indigo-600 px-6 py-2 text-base font-semibold text-white shadow hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-pointer" %>
           </div>
         </div>
+      <% end %>
 
-        <div>
-          <%= f.label :password, "Nueva contraseña", class: "block text-sm font-medium text-gray-900" %>
-          <span class="text-sm text-gray-500">(déjalo en blanco si no quieres cambiarlo)</span>
-          <div class="mt-2">
-            <%= f.password_field :password, autocomplete: "new-password",
-              class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 outline-gray-300 focus:outline-2 focus:outline-indigo-600 sm:text-sm" %>
-          </div>
-          <% if @minimum_password_length %>
-            <em class="text-sm text-gray-500"><%= @minimum_password_length %> caracteres mínimo</em>
-          <% end %>
-        </div>
-
-        <div>
-          <%= f.label :password_confirmation, "Confirma la nueva contraseña", class: "block text-sm font-medium text-gray-900" %>
-          <div class="mt-2">
-            <%= f.password_field :password_confirmation, autocomplete: "new-password",
-              class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 outline-gray-300 focus:outline-2 focus:outline-indigo-600 sm:text-sm" %>
-          </div>
-        </div>
-
-        <div>
-          <%= f.label :current_password, "Contraseña actual", class: "block text-sm font-medium text-gray-900" %>
-          <span class="text-sm text-gray-500">(necesario para confirmar los cambios)</span>
-          <div class="mt-2">
-            <%= f.password_field :current_password, autocomplete: "current-password", required: true,
-              class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 outline-gray-300 focus:outline-2 focus:outline-indigo-600 sm:text-sm" %>
-          </div>
-        </div>
-
-        <div>
-          <%= f.submit "Actualizar", class: "flex w-full justify-center rounded-xl bg-indigo-600 px-6 py-2 text-base font-semibold text-white shadow hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-pointer" %>
-        </div>
+      <div class="mt-6 border-t border-gray-200 pt-4 text-center">
+        <h3 class="text-sm font-semibold text-gray-900">¿No estás satisfecho?</h3>
+        <%= button_to "Eliminar mi cuenta", registration_path(resource_name), data: { confirm: "¿Estás seguro?", turbo_confirm: "¿Estás seguro?" }, method: :delete,
+          class: "mt-2 text-sm font-semibold text-red-600 hover:text-red-500 cursor-pointer" %>
       </div>
-    <% end %>
 
-    <div class="mt-6 border-t border-gray-200 pt-4 text-center">
-      <h3 class="text-sm font-semibold text-gray-900">¿No estás satisfecho?</h3>
-      <%= button_to "Eliminar mi cuenta", registration_path(resource_name), data: { confirm: "¿Estás seguro?", turbo_confirm: "¿Estás seguro?" }, method: :delete,
-        class: "mt-2 text-sm font-semibold text-red-600 hover:text-red-500 cursor-pointer" %>
-    </div>
-
-    <div class="mt-4 text-center">
-      <%= link_to "Volver", :back, class: "text-sm font-semibold text-indigo-600 hover:text-indigo-500" %>
+      <div class="mt-4 text-center">
+        <%= link_to "Volver", :back, class: "text-sm font-semibold text-indigo-600 hover:text-indigo-500" %>
+      </div>
     </div>
   </div>
 </div>
- 

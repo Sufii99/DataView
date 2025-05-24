@@ -72,3 +72,5 @@ gem "csv", require: false
 group :test do
   gem "simplecov", require: false
 end
+
+gem "image_processing", "~> 1.2"
