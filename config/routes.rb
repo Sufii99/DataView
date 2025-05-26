@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   get "/privacy", to: "pages#privacy"
 
   # Uso de devise para autenticación de usuarios
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: "users/registrations"
+  }
 
   # Ruta de "Dashboard" (solo usuarios autenticados)
   authenticate :user do
