@@ -185,12 +185,15 @@ export default function ChartSelector({ data, columns }) {
         }
 
         // Valores numéricos actuales para estadísticas
-        const yValues = data.map(d => Number(d[yColumn])).filter(v => !isNaN(v));
-
         return (
           <>
             {chart}
-            <ChartStatistics data={yValues} />
+            <ChartStatistics
+              data={data}
+              xKey={xColumn}
+              yKey={yColumn}
+              aggregation={aggregation}
+            />
           </>
         );
       })()}

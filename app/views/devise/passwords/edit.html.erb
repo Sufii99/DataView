@@ -38,8 +38,19 @@
         </div>
       <% end %>
 
-      <div class="mt-6">
-        <%= render "devise/shared/links" %>
+      <div class="mt-8 text-center text-sm text-gray-500 space-y-2">
+        <p>
+          ¿Ya tienes cuenta?
+          <%= link_to "Inicia sesión", new_user_session_path, class: "font-semibold text-indigo-600 hover:text-indigo-500" %>
+        </p>
+        <p>
+          ¿No tienes cuenta?
+          <%= link_to "Regístrate", new_user_registration_path, class: "font-semibold text-indigo-600 hover:text-indigo-500" %>
+        </p>
+        <p>
+          ¿No recibiste las instrucciones de confirmación?
+          <%= link_to "Reenviar confirmación", new_user_confirmation_path, class: "font-semibold text-indigo-600 hover:text-indigo-500" %>
+        </p>
       </div>
     </div>
   </div>
