@@ -4,8 +4,6 @@
 DataView es una plataforma web orientada a la visualización, análisis y gestión de datos, pensada para ofrecer una experiencia de usuario intuitiva y eficiente. Su diseño combina simplicidad y potencia, permitiendo a los usuarios acceder, interpretar y administrar información de manera ágil, sin requerir conocimientos técnicos avanzados.
 
 
-
-
 ## Funcionalidades
 
 - 📝 Registro e inicio de sesión con validaciones personalizadas
@@ -19,61 +17,54 @@ DataView es una plataforma web orientada a la visualización, análisis y gesti�
 - 🍪 Sistema de aceptación y gestión de cookies
 
 
-## Tech Stack
+## Tecnologías
 
-**Client:** React, Redux, TailwindCSS
+**Cliente:** React, HTML, TailwindCSS
 
-**Server:** Node, Express
-
-
-## Screenshots
-
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+**Servidor:** Ruby on Rails
 
 
-## Run Locally
+## Ejecutar en local
 
-Clone the project
+Clona el proyecto
 
 ```bash
-  git clone https://link-to-project
+  git clone https://github.com/Sufii99/DataView.git 
 ```
 
-Go to the project directory
+Accede al directorio del proyecto
 
 ```bash
-  cd my-project
+  cd DataView
 ```
 
-Install dependencies
+Instala las dependencias
 
 ```bash
-  npm install
+  bundle install
 ```
 
-Start the server
-
 ```bash
-  npm run start
+  yarn install
 ```
 
-
-## Running Tests
-
-To run tests, run the following command
+Inicia el servidor
 
 ```bash
-  npm run test
+  bin/dev
 ```
 
 
-## Support
+## Ejecutar pruebas
 
-For support, email fake@fake.com or join our Slack channel.
+Para ejecutar las pruebas unitarias, ejecuta el siguiente comando:
+
+```bash
+  rails test
+```
 
 
-## 🔗 Links
-[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://google.com/)
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/)
+## Soporte
 
+Para soporte, envia un correo a dataviewtest@gmail.com.
 
