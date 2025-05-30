@@ -4,7 +4,7 @@ document.addEventListener("turbo:load", function () {
 
   if (!cookieBanner || !acceptBtn) return;
 
-  // Mostrar solo si no está aceptada
+  /* Mostrar solo si no está aceptada */
   if (!document.cookie.includes("cookies_accepted=true")) {
     cookieBanner.style.display = "block";
   }
@@ -17,9 +17,7 @@ document.addEventListener("turbo:load", function () {
         "Content-Type": "application/json"
       }
     }).then(() => {
-      // Ocultar banner
       cookieBanner.style.display = "none";
-      // Establecer cookie también desde JS por si Turbo aún no ha procesado la respuesta
       document.cookie = "cookies_accepted=true; path=/; max-age=31536000";
     });
   });

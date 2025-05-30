@@ -184,7 +184,6 @@ export default function ChartSelector({ data, columns }) {
           );
         }
 
-        // Valores numéricos actuales para estadísticas
         return (
           <>
             {chart}

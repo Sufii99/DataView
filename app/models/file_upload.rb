@@ -1,6 +1,6 @@
 class FileUpload < ApplicationRecord
   belongs_to :user
-  has_one_attached :data_file # Active Storage para guardar el archivo real
+  has_one_attached :data_file
 
   validates :name, presence: true
   validate :data_file_attached

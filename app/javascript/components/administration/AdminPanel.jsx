@@ -67,7 +67,7 @@ export default function AdminPanel() {
       <div className="min-h-screen bg-gradient-to-br from-blue-200 via-white to-blue-400 min-h-screen text-gray-800 py-10 px-4 pt-30 flex justify-center">
         <div className="w-full max-w-7xl flex flex-col gap-8">
 
-          {/* Card: Panel de usuarios */}
+          {/* Panel de usuarios */}
           <div className="bg-white shadow-md rounded-2xl p-6">
             <div className="mb-6 flex items-center justify-between">
               <h1 className="text-2xl font-semibold text-gray-800">Panel de administración</h1>

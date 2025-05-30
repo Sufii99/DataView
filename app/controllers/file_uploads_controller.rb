@@ -28,7 +28,6 @@ class FileUploadsController < ApplicationController
     end
 
     if @file_upload.save
-      # ✅ Solo después de guardar, se puede analizar el archivo
       if @file_upload.data_file.attached?
         rows, columns = count_rows_and_columns(@file_upload.data_file, @file_upload.file_type)
         @file_upload.update(rows_count: rows, columns_count: columns)

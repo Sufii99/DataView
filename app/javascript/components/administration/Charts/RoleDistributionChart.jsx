@@ -9,7 +9,6 @@ export default function RoleDistributionChart({ users }) {
     renderDonutChart(users, chartRef.current)
   }, [users])
 
-  // Ocultar tooltip si el mouse sale del contenedor
   useEffect(() => {
     const handleMouseLeave = (e) => {
       if (!chartRef.current.contains(e.relatedTarget)) {
@@ -33,7 +32,7 @@ export default function RoleDistributionChart({ users }) {
       <h2 className="text-lg font-semibold text-gray-800 text-center mb-4">Distribución de roles</h2>
       <div ref={chartRef} className="w-full h-56 flex justify-center items-center relative" />
 
-      {/* Leyenda debajo */}
+      {/* Leyenda */}
       <div className="mt-4 flex gap-6 justify-center text-sm">
         <LegendItem label="Admins" count={adminCount} color="#34D399" />
         <LegendItem label="Usuarios" count={userCount} color="#3B82F6" />
@@ -80,7 +79,7 @@ function renderDonutChart(users, container) {
   const pie = d3.pie().value(d => d.value)
   const arc = d3.arc().innerRadius(60).outerRadius(radius)
 
-  // Tooltip
+  /* Tooltip */
   const tooltip = d3.select(container)
     .append("div")
     .attr("id", "tooltip")

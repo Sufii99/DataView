@@ -106,7 +106,6 @@ export default function StackedBarChart({ data, xKey, yKey, stackKey, aggregatio
       .selectAll('text')
       .style('font-size', '12px');
 
-    // Dibujar barras con animación y esquinas redondeadas
     svg.selectAll('g.layer')
       .data(series)
       .join('g')

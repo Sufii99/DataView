@@ -1,7 +1,7 @@
 import React from "react";
 import * as d3 from "d3";
 
-// Agrupa y agrega los datos por xKey
+/* Agrupamos y agregamos los datos por xKey */
 function aggregateData(data, xKey, yKey, aggregation) {
   return Array.from(
     d3.group(data, d => d[xKey]),
@@ -15,7 +15,7 @@ function aggregateData(data, xKey, yKey, aggregation) {
   ).filter(v => !isNaN(v));
 }
 
-// Calcula estadísticas básicas
+/* Calculamos estadísticas básicas */
 function calculateStats(values) {
   const n = values.length;
   if (n === 0) return null;
