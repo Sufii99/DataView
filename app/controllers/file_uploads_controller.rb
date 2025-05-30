@@ -97,6 +97,7 @@ class FileUploadsController < ApplicationController
     when "xlsx"
       xlsx_data = attached_file.download
       Tempfile.create([ "upload", ".xlsx" ]) do |tempfile|
+        tempfile.binmode
         tempfile.write(xlsx_data)
         tempfile.rewind
         spreadsheet = Roo::Spreadsheet.open(tempfile.path, extension: :xlsx)

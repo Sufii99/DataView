@@ -64,7 +64,7 @@ export default function AdminPanel() {
         onClose={() => setFlash({ message: null, type: "notice" })}
       />
 
-      <div className="min-h-screen bg-gray-100 py-10 px-4 pt-30 flex justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-blue-200 via-white to-blue-400 min-h-screen text-gray-800 py-10 px-4 pt-30 flex justify-center">
         <div className="w-full max-w-7xl flex flex-col gap-8">
 
           {/* Card: Panel de usuarios */}

@@ -8,7 +8,7 @@ export default function MainContent({ activeSection, selectedFileId, setUploaded
   const selectedFile = uploadedFiles[selectedFileId] || null;
 
   return (
-    <main className="flex-1 p-6 overflow-y-auto">
+    <main className="flex-1 p-6 overflow-y-auto bg-gradient-to-br from-blue-100 via-white to-blue-200 min-h-screen text-gray-800">
       
       {/* Subir archivo */}
       {activeSection === 'upload' && (
@@ -22,7 +22,7 @@ export default function MainContent({ activeSection, selectedFileId, setUploaded
       {/* Archivos */}
       {activeSection === 'file' && selectedFile && (
         <div>
-          <h1 className="text-3xl font-bold mb-6">Archivo: {selectedFile.name}</h1>
+          <h1 className="text-3xl font-bold mb-6">{selectedFile.name}</h1>
           {/* Visualización del archivo seleccionado */}
           <FileVisualizer file={selectedFile} />
         </div>
